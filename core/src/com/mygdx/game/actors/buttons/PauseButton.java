@@ -11,17 +11,17 @@ import com.mygdx.game.screens.PlayScreen;
  * Created by Sergey on 05.10.2016.
  */
 
-public class PlayButton extends Button {
+public class PauseButton extends Button {
     private GameScreen screen;
 
-    public PlayButton(final GameScreen screen) {
+    public PauseButton(final GameScreen screen) {
         this.screen = screen;
         Button.ButtonStyle style = new Button.ButtonStyle();
-        style.up = GameB.skin.getDrawable("playLight");
-        style.down = GameB.skin.getDrawable("playDark");
-
+        style.up = GameB.skin.getDrawable("pauseLight");
+        style.down = GameB.skin.getDrawable("pauseDark");
         setStyle(style);
-        setSize(GameB.WIDTH / 5, GameB.WIDTH / 5);
+
+        setSize(GameB.WIDTH / 10, GameB.WIDTH / 10);
 
         addListener(new ClickListener() {
             @Override
@@ -29,7 +29,5 @@ public class PlayButton extends Button {
                 screen.getGame().setScreen(new PlayScreen(screen.getGame()));
             }
         });
-  }
-
-
+    }
 }

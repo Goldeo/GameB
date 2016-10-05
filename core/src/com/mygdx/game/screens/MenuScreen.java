@@ -7,7 +7,7 @@ import com.mygdx.game.actors.buttons.PlayButton;
 
 public class MenuScreen extends GameScreen {
 
-    PlayButton playButton;
+    private PlayButton playButton;
 
     public MenuScreen(GameB game) {
         super(game);
@@ -16,7 +16,7 @@ public class MenuScreen extends GameScreen {
     @Override
     protected void initialization() {
         playButton = new PlayButton(this);
-        getStage().addActor(playButton);
+        stage.addActor(playButton);
     }
 
     @Override
