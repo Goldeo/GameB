@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.screens.MenuScreen;
+import com.mygdx.game.screens.PlayScreen;
 
 public class GameB extends Game {
     public static TextureAtlas atlas;

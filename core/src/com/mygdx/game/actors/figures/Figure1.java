@@ -10,10 +10,13 @@ import com.mygdx.game.actors.panels.Panel;
 public class Figure1 extends Figure {
 
     public Figure1() {
+        super();
         add(new Panel(Panel.Color.LIME)).spaceRight(2);
         add(new Panel(Panel.Color.LIME)).spaceRight(2);
         row().spaceTop(2);
         add(new Panel(Panel.Color.LIME)).spaceRight(2);
+        columnDefaults(1);
         add(new Panel(Panel.Color.LIME)).spaceRight(2);
     }
+
 }

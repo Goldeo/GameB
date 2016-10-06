@@ -21,4 +21,6 @@ public class Figure2 extends Figure {
         add(new Panel(Panel.Color.AQUA)).spaceRight(2);
         add(new Panel(Panel.Color.AQUA)).spaceRight(2);
     }
+
+
 }

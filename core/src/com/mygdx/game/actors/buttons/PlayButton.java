@@ -28,6 +28,8 @@ public class PlayButton extends Button {
             public void clicked(InputEvent event, float x, float y) {
                 screen.getGame().setScreen(new PlayScreen(screen.getGame()));
             }
+
+
         });
   }
 
