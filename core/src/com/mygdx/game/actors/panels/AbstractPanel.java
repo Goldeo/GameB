@@ -12,6 +12,7 @@ public abstract class AbstractPanel extends Actor {
 
     protected TextureRegion texture;
     protected float length;
+
     public enum Color {
         LIME, BLUE, RED, PURPLE, YELLOW, AQUA, ORANGE, GREEN
     }

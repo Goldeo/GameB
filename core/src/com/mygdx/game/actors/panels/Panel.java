@@ -9,7 +9,7 @@ import com.mygdx.game.GameB;
 public class Panel extends AbstractPanel {
 
     public Panel(Color color) {
-        length = 30;
+        length = 20;
 
         switch (color) {
             case LIME:
@@ -39,6 +39,7 @@ public class Panel extends AbstractPanel {
             default:
                 break;
         }
+
         setSize(length, length);
     }
 

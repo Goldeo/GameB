@@ -14,6 +14,10 @@ public abstract class GameScreen implements Screen {
     protected GameB game;
     protected Stage stage;
 
+    public Stage getStage() {
+        return stage;
+    }
+
     public GameScreen(final GameB game) {
         this.game = game;
         stage = new Stage(new StretchViewport(GameB.WIDTH, GameB.HEIGHT));

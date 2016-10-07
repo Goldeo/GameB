@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.GameB;
 import com.mygdx.game.actors.buttons.PauseButton;
+import com.mygdx.game.actors.figures.Figure;
+import com.mygdx.game.actors.figures.FigureAqua;
 import com.mygdx.game.actors.figures.FigureGroup;
 import com.mygdx.game.actors.panels.Field;
 
@@ -21,7 +23,7 @@ public class PlayScreen extends GameScreen {
     protected void initialization() {
         pauseButton = new PauseButton(this);
         field = new Field();
-        figureGroup = new FigureGroup();
+        figureGroup = new FigureGroup(this);
     }
 
     @Override
@@ -29,12 +31,10 @@ public class PlayScreen extends GameScreen {
         pauseButton.setPosition(GameB.WIDTH - pauseButton.getWidth() - 15, GameB.HEIGHT - pauseButton.getHeight() - 10);
         field.setPosition(GameB.WIDTH / 2, 500);
 
-        figureGroup.setPosition(15, 100);
-
+        figureGroup.setPosition(15, 150);
         stage.addActor(pauseButton);
         stage.addActor(field);
         stage.addActor(figureGroup);
-
     }
 
     @Override
@@ -59,48 +59,5 @@ public class PlayScreen extends GameScreen {
     public void dispose() {
 
     }
-
-
-    /*@Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        figureGroup.setPosition(screenX, GameB.HEIGHT - screenY);
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
-    }*/
-
 
 }
