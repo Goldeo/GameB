@@ -9,12 +9,12 @@ import com.mygdx.game.actors.panels.Panel;
 public class FigureRed1 extends Figure {
 
     public FigureRed1() {
-        super();
+        /*super();
         add(new Panel(Panel.Color.RED)).spaceRight(SPACING);
         add(new Panel(Panel.Color.RED)).spaceRight(SPACING);
         add(new Panel(Panel.Color.RED)).spaceRight(SPACING);
         add(new Panel(Panel.Color.RED)).spaceRight(SPACING);
-        add(new Panel(Panel.Color.RED)).spaceRight(SPACING);
+        add(new Panel(Panel.Color.RED)).spaceRight(SPACING);*/
     }
 
 }

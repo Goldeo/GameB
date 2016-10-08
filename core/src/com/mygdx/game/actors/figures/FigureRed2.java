@@ -9,7 +9,7 @@ import com.mygdx.game.actors.panels.Panel;
 public class FigureRed2 extends Figure {
 
     public FigureRed2() {
-        super();
+        /*super();
         add(new Panel(Panel.Color.RED));
         row().spaceTop(SPACING);
         add(new Panel(Panel.Color.RED));
@@ -18,7 +18,7 @@ public class FigureRed2 extends Figure {
         row().spaceTop(SPACING);
         add(new Panel(Panel.Color.RED));
         row().spaceTop(SPACING);
-        add(new Panel(Panel.Color.RED));
+        add(new Panel(Panel.Color.RED));*/
     }
 
 }

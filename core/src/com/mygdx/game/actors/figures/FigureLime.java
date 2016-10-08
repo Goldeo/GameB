@@ -10,12 +10,12 @@ import com.mygdx.game.actors.panels.Panel;
 public class FigureLime extends Figure {
 
     public FigureLime() {
-        super();
+        /*super();
         add(new Panel(Panel.Color.LIME));
         add(new Panel(Panel.Color.LIME)).spaceLeft(SPACING);
         row().spaceTop(SPACING);
         add(new Panel(Panel.Color.LIME));
-        add(new Panel(Panel.Color.LIME)).spaceLeft(SPACING);
+        add(new Panel(Panel.Color.LIME)).spaceLeft(SPACING);*/
     }
 
 }

@@ -10,8 +10,8 @@ import com.mygdx.game.actors.panels.Panel;
 public class FigurePurple extends Figure {
 
     public FigurePurple() {
-        super();
-        add(new Panel(Panel.Color.PURPLE));
+        /*super();
+        add(new Panel(Panel.Color.PURPLE));*/
     }
 
 }

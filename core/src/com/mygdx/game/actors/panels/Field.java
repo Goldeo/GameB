@@ -1,6 +1,5 @@
 package com.mygdx.game.actors.panels;
 
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
@@ -10,14 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 public class Field extends Table {
 
     private static final int LENGTH = 10;
+    private static final int SPACING = 5;
 
     public Field() {
-
-        setTouchable(Touchable.disabled);
-
         for (int i = 0; i < LENGTH; ++i) {
             for (int j = 0; j < LENGTH; ++j) {
-                add(new Cell()).spaceRight(5);
+                add(new Cell()).spaceRight(SPACING);
             }
             row().spaceTop(5);
         }

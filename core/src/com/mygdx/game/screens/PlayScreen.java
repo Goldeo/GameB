@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.GameB;
 import com.mygdx.game.actors.buttons.PauseButton;
-import com.mygdx.game.actors.figures.Figure;
-import com.mygdx.game.actors.figures.FigureAqua;
 import com.mygdx.game.actors.figures.FigureGroup;
 import com.mygdx.game.actors.panels.Field;
 
@@ -23,18 +21,16 @@ public class PlayScreen extends GameScreen {
     protected void initialization() {
         pauseButton = new PauseButton(this);
         field = new Field();
-        figureGroup = new FigureGroup(this);
     }
 
     @Override
     protected void setSettings() {
         pauseButton.setPosition(GameB.WIDTH - pauseButton.getWidth() - 15, GameB.HEIGHT - pauseButton.getHeight() - 10);
-        field.setPosition(GameB.WIDTH / 2, 500);
+        field.setPosition(GameB.WIDTH / 2, GameB.HEIGHT / 2);
 
-        figureGroup.setPosition(15, 150);
         stage.addActor(pauseButton);
         stage.addActor(field);
-        stage.addActor(figureGroup);
+        figureGroup = new FigureGroup(this);
     }
 
     @Override

@@ -12,11 +12,8 @@ public class FigureBlue1 extends Figure {
         add(new Panel(Panel.Color.BLUE));
         add(new Panel(Panel.Color.BLUE)).spaceLeft(SPACING);
         add(new Panel(Panel.Color.BLUE)).spaceLeft(SPACING);
-        row().spaceTop(SPACING);
-        add(new Panel(Panel.Color.BLUE));
-        row().spaceTop(SPACING);
-        add(new Panel(Panel.Color.BLUE));
-        setStandartPosition();
+        row().padTop(SPACING);
+        add(new Panel(Panel.Color.BLUE)).spaceLeft(44);
     }
 
 }

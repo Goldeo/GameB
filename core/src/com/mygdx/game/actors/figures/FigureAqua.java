@@ -9,8 +9,7 @@ import com.mygdx.game.actors.panels.*;
 public class FigureAqua extends Figure {
 
     public FigureAqua() {
-        super();
-        add(new Panel(Panel.Color.AQUA));
+        /*add(new Panel(Panel.Color.AQUA));
         add(new Panel(Panel.Color.AQUA)).spaceLeft(SPACING);
         add(new Panel(Panel.Color.AQUA)).spaceLeft(SPACING);
         row().spaceTop(SPACING);
@@ -20,7 +19,7 @@ public class FigureAqua extends Figure {
         row().spaceTop(SPACING);
         add(new Panel(Panel.Color.AQUA));
         add(new Panel(Panel.Color.AQUA)).spaceLeft(SPACING);
-        add(new Panel(Panel.Color.AQUA)).spaceLeft(SPACING);
+        add(new Panel(Panel.Color.AQUA)).spaceLeft(SPACING);*/
     }
 
 }
