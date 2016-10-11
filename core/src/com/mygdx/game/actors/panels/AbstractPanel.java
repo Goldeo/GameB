@@ -11,14 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public abstract class AbstractPanel extends Actor {
 
     protected TextureRegion texture;
-    protected float length;
-
-    public enum Color {
-        LIME, BLUE, RED, PURPLE, YELLOW, AQUA, ORANGE, GREEN
-    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
+
 }

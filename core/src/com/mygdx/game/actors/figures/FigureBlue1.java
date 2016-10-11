@@ -1,5 +1,6 @@
 package com.mygdx.game.actors.figures;
 
+import com.mygdx.game.actors.panels.PanelMoving;
 import com.mygdx.game.actors.panels.Panel;
 
 /**
@@ -9,11 +10,27 @@ import com.mygdx.game.actors.panels.Panel;
 public class FigureBlue1 extends Figure {
 
     public FigureBlue1() {
-        add(new Panel(Panel.Color.BLUE));
-        add(new Panel(Panel.Color.BLUE)).spaceLeft(SPACING);
-        add(new Panel(Panel.Color.BLUE)).spaceLeft(SPACING);
-        row().padTop(SPACING);
-        add(new Panel(Panel.Color.BLUE)).spaceLeft(44);
+        Panel panel = new PanelMoving(Panel.Color.BLUE);
+        panel.setPosition(2 * PANEL_LENGTH, 0);
+        addActor(panel);
+
+        panel = new PanelMoving(Panel.Color.BLUE);
+        panel.setPosition(2 * PANEL_LENGTH, PANEL_LENGTH);
+        addActor(panel);
+
+        panel = new PanelMoving(Panel.Color.BLUE);
+        panel.setPosition(2 * PANEL_LENGTH, 2 * PANEL_LENGTH);
+        addActor(panel);
+
+        panel = new PanelMoving(Panel.Color.BLUE);
+        panel.setPosition(PANEL_LENGTH, 0);
+        addActor(panel);
+
+        panel = new PanelMoving(Panel.Color.BLUE);
+        panel.setPosition(0, 0);
+        addActor(panel);
+
+        setBounds(getX(), getY(), 64, 64);
     }
 
 }

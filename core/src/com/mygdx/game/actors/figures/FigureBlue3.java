@@ -7,23 +7,23 @@ import com.mygdx.game.actors.panels.Panel;
  * Created by Sergey on 05.10.2016.
  */
 
-public class FigureBlue2 extends Figure {
+public class FigureBlue3 extends Figure {
 
-    public FigureBlue2() {
+    public FigureBlue3() {
         Panel panel = new PanelMoving(Panel.Color.BLUE);
         panel.setPosition(2 * PANEL_LENGTH, 0);
         addActor(panel);
 
         panel = new PanelMoving(Panel.Color.BLUE);
-        panel.setPosition(2 * PANEL_LENGTH, PANEL_LENGTH);
+        panel.setPosition(PANEL_LENGTH, 0);
         addActor(panel);
 
         panel = new PanelMoving(Panel.Color.BLUE);
-        panel.setPosition(2 * PANEL_LENGTH, 2 * PANEL_LENGTH);
+        panel.setPosition(0, 0);
         addActor(panel);
 
         panel = new PanelMoving(Panel.Color.BLUE);
-        panel.setPosition(PANEL_LENGTH, 2 * PANEL_LENGTH);
+        panel.setPosition(0, PANEL_LENGTH);
         addActor(panel);
 
         panel = new PanelMoving(Panel.Color.BLUE);

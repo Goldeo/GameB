@@ -28,7 +28,7 @@ public class GameB extends Game {
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
         skin.addRegions(atlas);
         setScreen(new MenuScreen(this));
-        setGameState(GameB.State.RUNNING);
+        setGameState(State.RUNNING);
     }
 
     @Override

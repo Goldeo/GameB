@@ -48,7 +48,7 @@ public class PlayScreen extends GameScreen {
 
     @Override
     public void resume() {
-
+        super.resume();
     }
 
     @Override

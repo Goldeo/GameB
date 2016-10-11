@@ -115,23 +115,30 @@ orangePanel
   orig: 40, 40
   offset: 0, 0
   index: -1
-purplePanel
+pinkPanel
   rotate: false
   xy: 753, 9
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-redPanel
+purplePanel
   rotate: false
   xy: 795, 9
   size: 40, 40
   orig: 40, 40
   offset: 0, 0
   index: -1
-yellowPanel
+redPanel
   rotate: false
   xy: 837, 9
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+yellowPanel
+  rotate: false
+  xy: 879, 9
   size: 40, 40
   orig: 40, 40
   offset: 0, 0

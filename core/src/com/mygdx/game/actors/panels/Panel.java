@@ -1,15 +1,31 @@
 package com.mygdx.game.actors.panels;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SizeByAction;
 import com.mygdx.game.GameB;
 
 /**
  * Created by Sergey on 05.10.2016.
  */
 
-public class Panel extends AbstractPanel {
+public abstract class Panel extends AbstractPanel {
+
+    public static final float LENGTH = 25;
+    protected static final float SIZE_AMOUNT = 10;
+    protected static final float MOVE_AMOUNT = 10;
+    protected MoveByAction moveByActionDec = new MoveByAction();
+    protected MoveByAction moveByActionInc = new MoveByAction();
+    protected SizeByAction sizeByActionDec = new SizeByAction();
+    protected SizeByAction sizeByActionInc = new SizeByAction();
+    protected float row;
+    protected float column;
+
+    public enum Color {
+        AQUA, BLUE, GREEN, LIME, ORANGE, PINK, PURPLE, RED, YELLOW
+    }
 
     public Panel(Color color) {
-        length = 20;
 
         switch (color) {
             case LIME:
@@ -36,11 +52,34 @@ public class Panel extends AbstractPanel {
             case GREEN:
                 texture = GameB.atlas.findRegion("greenPanel");
                 break;
+            case PINK:
+                texture = GameB.atlas.findRegion("pinkPanel");
+                break;
             default:
                 break;
         }
 
-        setSize(length, length);
+        setSize(LENGTH, LENGTH);
     }
 
+    public void setPos(float row, float column) {
+        this.row = row;
+        this.column = column;
+    }
+
+    public void decSize() {
+        sizeByActionDec.restart();
+        moveByActionDec.restart();
+
+        addAction(sizeByActionDec);
+        addAction(moveByActionDec);
+    }
+
+    public void incSize() {
+        sizeByActionInc.restart();
+        moveByActionInc.restart();
+
+        addAction(sizeByActionInc);
+        addAction(moveByActionInc);
+    }
 }

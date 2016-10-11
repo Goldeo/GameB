@@ -1,7 +1,6 @@
 package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -12,7 +11,7 @@ import com.mygdx.game.GameB;
  */
 public abstract class GameScreen implements Screen {
     protected GameB game;
-    protected Stage stage;
+    protected Stage stage = new Stage(new StretchViewport(GameB.WIDTH, GameB.HEIGHT));
 
     public Stage getStage() {
         return stage;
@@ -20,7 +19,6 @@ public abstract class GameScreen implements Screen {
 
     public GameScreen(final GameB game) {
         this.game = game;
-        stage = new Stage(new StretchViewport(GameB.WIDTH, GameB.HEIGHT));
         initialization();
         setSettings();
     }
