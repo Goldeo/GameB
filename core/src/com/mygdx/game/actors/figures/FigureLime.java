@@ -10,12 +10,17 @@ import com.mygdx.game.actors.panels.Panel;
 public class FigureLime extends Figure {
 
     public FigureLime() {
-        /*super();
-        add(new Panel(Panel.Color.LIME));
-        add(new Panel(Panel.Color.LIME)).spaceLeft(SPACING);
-        row().spaceTop(SPACING);
-        add(new Panel(Panel.Color.LIME));
-        add(new Panel(Panel.Color.LIME)).spaceLeft(SPACING);*/
+        for (int i = 0; i < 2; ++i)
+            for (int j = 0; j < 2; ++j) {
+                panel = new Panel(Panel.Color.LIME);
+                panel.setPosition(i * PANEL_SPACING, j * PANEL_SPACING + PADDING_Y);
+                panel.setActions(j, i);
+                addActor(panel);
+            }
+
+        width = 2 * Panel.LENGTH + Figure.SPACING;
+        height = 2 * Panel.LENGTH + Figure.SPACING + 2 * PADDING_Y;
+        setSize(width, height);
     }
 
 }

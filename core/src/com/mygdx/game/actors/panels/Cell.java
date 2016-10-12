@@ -9,7 +9,7 @@ import com.mygdx.game.GameB;
 
 public class Cell extends AbstractPanel {
 
-    public static final float LENGTH = 35;
+    public static final float LENGTH = 38;
 
     public Cell() {
         texture = GameB.atlas.findRegion("grayPanel");

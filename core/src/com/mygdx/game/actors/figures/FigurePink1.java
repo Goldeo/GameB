@@ -6,17 +6,17 @@ import com.mygdx.game.actors.panels.Panel;
  * Created by Sergey on 05.10.2016.
  */
 
-public class FigureRed1 extends Figure {
+public class FigurePink1 extends Figure {
 
-    public FigureRed1() {
-        for (int i = 0; i < 5; ++i) {
-            panel = new Panel(Panel.Color.RED);
+    public FigurePink1() {
+        for (int i = 0; i < 4; ++i) {
+            panel = new Panel(Panel.Color.PINK);
             panel.setPosition(i * PANEL_SPACING, PADDING_Y);
             panel.setActions(0, i);
             addActor(panel);
         }
 
-        width = 5 * Panel.LENGTH + 4 * Figure.SPACING;
+        width = 4 * Panel.LENGTH + 3 * Figure.SPACING;
         height = Panel.LENGTH + 2 * PADDING_Y;
         setSize(width, height);
     }

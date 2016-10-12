@@ -9,14 +9,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 public class Field extends Table {
 
     private static final int LENGTH = 10;
-    private static final int SPACING = 5;
+    private static final int SPACING = 2;
 
     public Field() {
         for (int i = 0; i < LENGTH; ++i) {
             for (int j = 0; j < LENGTH; ++j) {
                 add(new Cell()).spaceRight(SPACING);
             }
-            row().spaceTop(5);
+            row().spaceTop(SPACING);
         }
     }
 

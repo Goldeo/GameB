@@ -4,14 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.GameB;
 import com.mygdx.game.actors.buttons.PauseButton;
-import com.mygdx.game.actors.figures.FigureGroup;
+import com.mygdx.game.actors.figures.FigureCreator;
 import com.mygdx.game.actors.panels.Field;
 
 public class PlayScreen extends GameScreen {
 
     private Field field;
     private PauseButton pauseButton;
-    private FigureGroup figureGroup;
+    private FigureCreator figureCreator;
 
     public PlayScreen(GameB game) {
         super(game);
@@ -30,7 +30,7 @@ public class PlayScreen extends GameScreen {
 
         stage.addActor(pauseButton);
         stage.addActor(field);
-        figureGroup = new FigureGroup(this);
+        figureCreator = new FigureCreator(this);
     }
 
     @Override

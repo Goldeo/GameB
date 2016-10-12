@@ -9,52 +9,17 @@ import com.mygdx.game.actors.panels.*;
 public class FigureAqua extends Figure {
 
     public FigureAqua() {
-        Panel panel = new PanelNotMoving(Panel.Color.AQUA);
-        panel.setPosition(0, 0);
-        panel.setPos(0, 0);
-        addActor(panel);
+        for (int i = 0; i < 3; ++i)
+            for (int j = 0; j < 3; ++j) {
+                panel = new Panel(Panel.Color.AQUA);
+                panel.setPosition(i * PANEL_SPACING, j * PANEL_SPACING + PADDING_Y);
+                panel.setActions(j, i);
+                addActor(panel);
+            }
 
-        panel = new PanelMovingRight(Panel.Color.RED);
-        panel.setPosition(PANEL_LENGTH, 0);
-        panel.setPos(0, 1);
-        addActor(panel);
-
-        panel = new PanelMovingRight(Panel.Color.PINK);
-        panel.setPosition(2 * PANEL_LENGTH, 0);
-        panel.setPos(0, 2);
-        addActor(panel);
-
-        panel = new PanelMovingUp(Panel.Color.AQUA);
-        panel.setPosition(0, PANEL_LENGTH);
-        panel.setPos(1, 0);
-        addActor(panel);
-
-        panel = new PanelMoving(Panel.Color.AQUA);
-        panel.setPosition(PANEL_LENGTH, PANEL_LENGTH);
-        panel.setPos(1, 1);
-        addActor(panel);
-
-        panel = new PanelMoving(Panel.Color.AQUA);
-        panel.setPosition(2 * PANEL_LENGTH, PANEL_LENGTH);
-        panel.setPos(1, 2);
-        addActor(panel);
-
-        panel = new PanelMovingUp(Panel.Color.AQUA);
-        panel.setPosition(0, 2 * PANEL_LENGTH);
-        panel.setPos(2, 0);
-        addActor(panel);
-
-        panel = new PanelMoving(Panel.Color.AQUA);
-        panel.setPosition(PANEL_LENGTH, 2 * PANEL_LENGTH);
-        panel.setPos(2, 1);
-        addActor(panel);
-
-        panel = new PanelMoving(Panel.Color.AQUA);
-        panel.setPosition(2 * PANEL_LENGTH, 2 * PANEL_LENGTH);
-        panel.setPos(2, 2);
-        addActor(panel);
-
-        setBounds(getX(), getY(), 64, 64);
+        width = 3 * Panel.LENGTH + 2 * Figure.SPACING;
+        height = 3 * Panel.LENGTH + 2 * Figure.SPACING + 2 * PADDING_Y;
+        setSize(width, height);
     }
 
 }

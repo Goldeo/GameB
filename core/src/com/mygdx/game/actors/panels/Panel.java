@@ -1,6 +1,5 @@
 package com.mygdx.game.actors.panels;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SizeByAction;
 import com.mygdx.game.GameB;
@@ -9,17 +8,18 @@ import com.mygdx.game.GameB;
  * Created by Sergey on 05.10.2016.
  */
 
-public abstract class Panel extends AbstractPanel {
+public class Panel extends AbstractPanel {
 
-    public static final float LENGTH = 25;
-    protected static final float SIZE_AMOUNT = 10;
-    protected static final float MOVE_AMOUNT = 10;
-    protected MoveByAction moveByActionDec = new MoveByAction();
-    protected MoveByAction moveByActionInc = new MoveByAction();
-    protected SizeByAction sizeByActionDec = new SizeByAction();
-    protected SizeByAction sizeByActionInc = new SizeByAction();
-    protected float row;
-    protected float column;
+    public static final float LENGTH = 20;
+
+    private static final float SIZE_AMOUNT = 14;
+    private static final float MOVE_AMOUNT = 18;
+    private MoveByAction moveByActionDec = new MoveByAction();
+    private MoveByAction moveByActionInc = new MoveByAction();
+    private SizeByAction sizeByActionDec = new SizeByAction();
+    private SizeByAction sizeByActionInc = new SizeByAction();
+    private int row;
+    private int column;
 
     public enum Color {
         AQUA, BLUE, GREEN, LIME, ORANGE, PINK, PURPLE, RED, YELLOW
@@ -62,9 +62,21 @@ public abstract class Panel extends AbstractPanel {
         setSize(LENGTH, LENGTH);
     }
 
-    public void setPos(float row, float column) {
-        this.row = row;
-        this.column = column;
+    public void setActions(int x, int y) {
+        this.row = x;
+        this.column = y;
+
+        moveByActionDec.setAmount(-column * MOVE_AMOUNT, -row * MOVE_AMOUNT );
+        moveByActionDec.setDuration(0.2f);
+
+        moveByActionInc.setAmount(column * MOVE_AMOUNT, row * MOVE_AMOUNT);
+        moveByActionInc.setDuration(0.2f);
+
+        sizeByActionDec.setAmount(-SIZE_AMOUNT, -SIZE_AMOUNT);
+        sizeByActionDec.setDuration(0.2f);
+
+        sizeByActionInc.setAmount(SIZE_AMOUNT, SIZE_AMOUNT);
+        sizeByActionInc.setDuration(0.2f);
     }
 
     public void decSize() {

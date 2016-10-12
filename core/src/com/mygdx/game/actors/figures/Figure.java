@@ -13,11 +13,14 @@ import com.mygdx.game.listeners.MyDragListener;
 
 public abstract class Figure extends Group {
 
+    protected Panel panel;
+    protected float width;
+    protected float height;
+    protected static final float PADDING_Y = 30;
+    protected static final float SPACING = 2;
+    protected static final float PANEL_SPACING = SPACING + Panel.LENGTH;
     private Vector2 standardPosition = new Vector2();
     private MoveToAction moveToAction = new MoveToAction();
-
-    protected static final float SPACING = 2;
-    protected static final float PANEL_LENGTH = SPACING + Panel.LENGTH;
 
     public Figure() {
         addListener(new MyDragListener(this));
