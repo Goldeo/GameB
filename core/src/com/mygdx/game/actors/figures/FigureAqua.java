@@ -12,8 +12,7 @@ public class FigureAqua extends Figure {
         super(field);
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j) {
-                panel = new Panel(Panel.Color.AQUA, );
-                panel.setPosition(i * PANEL_SPACING, j * PANEL_SPACING + PADDING_Y);
+                panel = new Panel(Panel.Color.AQUA, i * PANEL_SPACING, j * PANEL_SPACING + PADDING_Y);
                 panel.setActions(j, i);
                 addActor(panel);
             }

@@ -12,8 +12,7 @@ public class FigureRed2 extends Figure {
     public FigureRed2(Field field) {
         super(field);
         for (int i = 0; i < 5; ++i) {
-            panel = new Panel(Panel.Color.RED);
-            panel.setPosition(PADDING_Y, i * PANEL_SPACING + PADDING_Y);
+            panel = new Panel(Panel.Color.RED, PADDING_Y, i * PANEL_SPACING + PADDING_Y);
             panel.setActions(i, 0);
             addActor(panel);
         }

@@ -12,18 +12,16 @@ public class FigureGreen2 extends Figure {
 
     public FigureGreen2(Field field) {
         super(field);
-        panel = new Panel(Panel.Color.GREEN);
+        panel = new Panel(Panel.Color.GREEN, 0, PADDING_Y);
         panel.setPosition(0, PADDING_Y);
         panel.setActions(0, 0);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.GREEN);
-        panel.setPosition(0, PANEL_SPACING + PADDING_Y);
+        panel = new Panel(Panel.Color.GREEN, 0, PANEL_SPACING + PADDING_Y);
         panel.setActions(1, 0);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.GREEN);
-        panel.setPosition(PANEL_SPACING, PANEL_SPACING + PADDING_Y);
+        panel = new Panel(Panel.Color.GREEN, PANEL_SPACING, PANEL_SPACING + PADDING_Y);
         panel.setActions(1, 1);
         addActor(panel);
 

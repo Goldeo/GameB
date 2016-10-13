@@ -12,8 +12,7 @@ public class FigurePink1 extends Figure {
     public FigurePink1(Field field) {
         super(field);
         for (int i = 0; i < 4; ++i) {
-            panel = new Panel(Panel.Color.PINK);
-            panel.setPosition(i * PANEL_SPACING, PADDING_Y);
+            panel = new Panel(Panel.Color.PINK, i * PANEL_SPACING, PADDING_Y);
             panel.setActions(0, i);
             addActor(panel);
         }

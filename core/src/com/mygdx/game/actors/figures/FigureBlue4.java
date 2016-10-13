@@ -11,28 +11,23 @@ public class FigureBlue4 extends Figure {
 
     public FigureBlue4(Field field) {
         super(field);
-        panel = new Panel(Panel.Color.BLUE);
-        panel.setPosition(2 * PANEL_SPACING, PADDING_Y);
+        panel = new Panel(Panel.Color.BLUE, 2 * PANEL_SPACING, PADDING_Y);
         panel.setActions(0, 2);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.BLUE);
-        panel.setPosition(2 * PANEL_SPACING, PANEL_SPACING + PADDING_Y);
+        panel = new Panel(Panel.Color.BLUE, 2 * PANEL_SPACING, PANEL_SPACING + PADDING_Y);
         panel.setActions(1, 2);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.BLUE);
-        panel.setPosition(2 * PANEL_SPACING, 2 * PANEL_SPACING + PADDING_Y);
+        panel = new Panel(Panel.Color.BLUE, 2 * PANEL_SPACING, 2 * PANEL_SPACING + PADDING_Y);
         panel.setActions(2, 2);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.BLUE);
-        panel.setPosition(PANEL_SPACING, 2* PANEL_SPACING + PADDING_Y);
+        panel = new Panel(Panel.Color.BLUE, PANEL_SPACING, 2* PANEL_SPACING + PADDING_Y);
         panel.setActions(2, 1);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.BLUE);
-        panel.setPosition(0, 2 * PANEL_SPACING + PADDING_Y);
+        panel = new Panel(Panel.Color.BLUE, 0, 2 * PANEL_SPACING + PADDING_Y);
         panel.setActions(2, 0);
         addActor(panel);
 

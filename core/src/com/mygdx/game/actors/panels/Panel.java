@@ -2,6 +2,8 @@ package com.mygdx.game.actors.panels;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SizeByAction;
 import com.mygdx.game.GameB;
 
@@ -15,10 +17,13 @@ public class Panel extends AbstractPanel {
 
     private static final float SIZE_AMOUNT = 14;
     private static final float MOVE_AMOUNT = 18;
+    private static final float DURATION = 0.2f;
     private MoveByAction moveByActionDec = new MoveByAction();
     private MoveByAction moveByActionInc = new MoveByAction();
     private SizeByAction sizeByActionDec = new SizeByAction();
     private SizeByAction sizeByActionInc = new SizeByAction();
+    private ParallelAction parallelActionDec = new ParallelAction(moveByActionDec, sizeByActionDec);
+    private ParallelAction parallelActionInc = new ParallelAction(moveByActionInc, sizeByActionInc);
     private int row;
     private int column;
 
@@ -69,32 +74,27 @@ public class Panel extends AbstractPanel {
         this.column = y;
 
         moveByActionDec.setAmount(-column * MOVE_AMOUNT, -row * MOVE_AMOUNT );
-        moveByActionDec.setDuration(0.2f);
+        moveByActionDec.setDuration(DURATION);
 
         moveByActionInc.setAmount(column * MOVE_AMOUNT, row * MOVE_AMOUNT);
-        moveByActionInc.setDuration(0.2f);
+        moveByActionInc.setDuration(DURATION);
 
         sizeByActionDec.setAmount(-SIZE_AMOUNT, -SIZE_AMOUNT);
-        sizeByActionDec.setDuration(0.2f);
+        sizeByActionDec.setDuration(DURATION);
 
         sizeByActionInc.setAmount(SIZE_AMOUNT, SIZE_AMOUNT);
-        sizeByActionInc.setDuration(0.2f);
+        sizeByActionInc.setDuration(DURATION);
+
     }
 
     public void decSize() {
-        sizeByActionDec.restart();
-        moveByActionDec.restart();
-
-        addAction(sizeByActionDec);
-        addAction(moveByActionDec);
+        parallelActionDec.restart();
+        addAction(parallelActionDec);
     }
 
     public void incSize() {
-        sizeByActionInc.restart();
-        moveByActionInc.restart();
-
-        addAction(sizeByActionInc);
-        addAction(moveByActionInc);
+        parallelActionInc.restart();
+        addAction(parallelActionInc);
     }
 
     /*public boolean isInideField() {

@@ -12,8 +12,7 @@ public class FigurePurple extends Figure {
 
     public FigurePurple(Field field) {
         super(field);
-        panel = new Panel(Panel.Color.PURPLE);
-        panel.setPosition(PADDING_Y, PADDING_Y);
+        panel = new Panel(Panel.Color.PURPLE, PADDING_Y, PADDING_Y);
         panel.setActions(0, 0);
         addActor(panel);
 
