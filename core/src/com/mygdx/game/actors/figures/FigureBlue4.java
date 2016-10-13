@@ -1,5 +1,6 @@
 package com.mygdx.game.actors.figures;
 
+import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
 
 /**
@@ -8,7 +9,8 @@ import com.mygdx.game.actors.panels.Panel;
 
 public class FigureBlue4 extends Figure {
 
-    public FigureBlue4() {
+    public FigureBlue4(Field field) {
+        super(field);
         panel = new Panel(Panel.Color.BLUE);
         panel.setPosition(2 * PANEL_SPACING, PADDING_Y);
         panel.setActions(0, 2);

@@ -1,6 +1,5 @@
 package com.mygdx.game.listeners;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.mygdx.game.actors.figures.Figure;
@@ -20,7 +19,6 @@ public class MyDragListener extends DragListener implements Cloneable {
     @Override
     public void drag(InputEvent event, float x, float y, int pointer) {
         super.drag(event, x, y, pointer);
-        Gdx.app.log("" + figure.getWidth(), "");
         figure.setPosition(figure.getX() - figure.getWidth() / 2 + x, figure.getY() + y);
     }
 
@@ -33,6 +31,7 @@ public class MyDragListener extends DragListener implements Cloneable {
     @Override
     public void dragStop(InputEvent event, float x, float y, int pointer) {
         super.dragStop(event, x, y, pointer);
+
         figure.goToStandardPosition();
     }
 

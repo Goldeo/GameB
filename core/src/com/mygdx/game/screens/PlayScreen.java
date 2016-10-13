@@ -26,11 +26,13 @@ public class PlayScreen extends GameScreen {
     @Override
     protected void setSettings() {
         pauseButton.setPosition(GameB.WIDTH - pauseButton.getWidth() - 15, GameB.HEIGHT - pauseButton.getHeight() - 10);
-        field.setPosition(GameB.WIDTH / 2, GameB.HEIGHT / 2);
+        field.setPosition(GameB.WIDTH / 2 - field.getWidth() / 2, GameB.HEIGHT / 2 - field.getHeight() / 2);
 
         stage.addActor(pauseButton);
         stage.addActor(field);
-        figureCreator = new FigureCreator(this);
+
+        figureCreator = new FigureCreator(this, GameB.WIDTH / 2, 100);
+        figureCreator.setField(field);
     }
 
     @Override

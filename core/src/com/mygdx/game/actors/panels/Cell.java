@@ -1,6 +1,7 @@
 package com.mygdx.game.actors.panels;
 
 
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.GameB;
 
 /**
@@ -14,5 +15,6 @@ public class Cell extends AbstractPanel {
     public Cell() {
         texture = GameB.atlas.findRegion("grayPanel");
         setSize(LENGTH, LENGTH);
+        rectangle = new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 }

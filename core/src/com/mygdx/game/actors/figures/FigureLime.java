@@ -1,6 +1,6 @@
 package com.mygdx.game.actors.figures;
 
-
+import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
 
 /**
@@ -9,7 +9,8 @@ import com.mygdx.game.actors.panels.Panel;
 
 public class FigureLime extends Figure {
 
-    public FigureLime() {
+    public FigureLime(Field field) {
+        super(field);
         for (int i = 0; i < 2; ++i)
             for (int j = 0; j < 2; ++j) {
                 panel = new Panel(Panel.Color.LIME);

@@ -1,5 +1,6 @@
 package com.mygdx.game.actors.panels;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SizeByAction;
 import com.mygdx.game.GameB;
@@ -25,7 +26,7 @@ public class Panel extends AbstractPanel {
         AQUA, BLUE, GREEN, LIME, ORANGE, PINK, PURPLE, RED, YELLOW
     }
 
-    public Panel(Color color) {
+    public Panel(Color color, float x, float y) {
 
         switch (color) {
             case LIME:
@@ -59,7 +60,8 @@ public class Panel extends AbstractPanel {
                 break;
         }
 
-        setSize(LENGTH, LENGTH);
+        setBounds(x, y, LENGTH, LENGTH);
+        rectangle = new Rectangle(x, y, LENGTH, LENGTH);
     }
 
     public void setActions(int x, int y) {
@@ -94,4 +96,10 @@ public class Panel extends AbstractPanel {
         addAction(sizeByActionInc);
         addAction(moveByActionInc);
     }
+
+    /*public boolean isInideField() {
+        if ((getX() + getWidth() / 2 > 0)) {
+
+        }
+    }*/
 }
