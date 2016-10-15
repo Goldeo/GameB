@@ -12,15 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public abstract class AbstractPanel extends Actor {
 
     protected TextureRegion texture;
-    protected Rectangle rectangle;
+    protected Rectangle rectangleBounds = new Rectangle();
 
-    public Rectangle getRectangle() {
-        return rectangle;
+    public Rectangle getRectangleBounds() {
+        return rectangleBounds;
     }
 
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
-    }
+    public abstract void setRectangleBounds();
+    public abstract float getAbsX();
+    public abstract float getAbsY();
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

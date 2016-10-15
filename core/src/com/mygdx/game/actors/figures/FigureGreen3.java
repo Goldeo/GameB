@@ -13,7 +13,6 @@ public class FigureGreen3 extends Figure {
     public FigureGreen3(Field field) {
         super(field);
         panel = new Panel(Panel.Color.GREEN, 0, PADDING_Y);
-        panel.setPosition(0, PADDING_Y);
         panel.setActions(0, 0);
         addActor(panel);
 

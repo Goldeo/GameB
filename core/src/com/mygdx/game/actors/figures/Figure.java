@@ -3,10 +3,14 @@ package com.mygdx.game.actors.figures;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.mygdx.game.actors.panels.Cell;
 import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
 import com.mygdx.game.listeners.MyDragListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by Sergey on 05.10.2016.
@@ -27,6 +31,14 @@ public abstract class Figure extends Group {
     public Figure(Field field) {
         this.field = field;
         addListener(new MyDragListener(this));
+    }
+
+    public int getChildrenCount() {
+        return getChildren().size;
+    }
+
+    public Field getField() {
+        return field;
     }
 
     public static Figure create(int type, Field field) {
@@ -74,6 +86,12 @@ public abstract class Figure extends Group {
         }
     }
 
+    public void repositionPanels() {
+        for (Actor panel: getChildren()) {
+            ((Panel) panel).setRectangleBounds();
+        }
+    }
+
     public void setStandartPosition() {
         standardPosition.set(getX(), getY());
     }
@@ -96,15 +114,36 @@ public abstract class Figure extends Group {
         }
     }
 
-    /*public boolean isInsideField() {
-        for (Actor: panel
-             ) {
+    public void check() {
+        int n = 0;
+        ArrayList<Panel> panels = new ArrayList<Panel>();
+        ArrayList<Cell> cells = new ArrayList<Cell>();
 
+        panels.clear();
+        cells.clear();
+
+        for (Actor panel: getChildren()) {
+            for (Actor cell: field.getChildren()) {
+                if (((Panel) panel).isInsideCell(((Cell)cell))) {
+                    ++n;
+                    panels.add((Panel) panel);
+                    cells.add((Cell) cell);
+                    break;
+                }
+            }
         }
-    }*/
 
-    public void stickFigure() {
-
+        if (n == getChildrenCount()) stickFigure(panels, cells);
+            else
+        goToStandardPosition();
     }
 
+    private void stickFigure(ArrayList<Panel> panels, ArrayList<Cell> cells) {
+
+        for (int i = 0; i < panels.size(); ++i) {
+            panels.get(i).stickPanel(cells.get(i));
+            cells.get(i).setFull(true);
+        }
+        setTouchable(Touchable.disabled);
+    }
 }

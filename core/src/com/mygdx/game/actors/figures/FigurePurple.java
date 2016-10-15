@@ -1,6 +1,5 @@
 package com.mygdx.game.actors.figures;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
 

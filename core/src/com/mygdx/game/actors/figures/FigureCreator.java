@@ -21,17 +21,12 @@ public class FigureCreator {
     private GameScreen screen;
     private Random random = new Random();
 
-    public FigureCreator(GameScreen screen, float leftSpacing, float bottomSpacing) {
+    public FigureCreator(GameScreen screen, Field field, float leftSpacing, float bottomSpacing) {
         this.screen = screen;
+        this.field = field;
         this.leftSpacing = leftSpacing;
         this.bottomSpacing = bottomSpacing;
         setFigures();
-    }
-
-
-
-    public void setField(Field field) {
-        this.field = field;
     }
 
     public void setFigures() {

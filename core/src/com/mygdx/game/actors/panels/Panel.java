@@ -1,10 +1,9 @@
 package com.mygdx.game.actors.panels;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SizeByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.mygdx.game.GameB;
 
 /**
@@ -14,18 +13,44 @@ import com.mygdx.game.GameB;
 public class Panel extends AbstractPanel {
 
     public static final float LENGTH = 20;
+    public static final float MEDIUM_LENGTH = 34;
+    public static final float BIG_LENGTH = 38;
+    private static final float MOVE_AMOUNT = BIG_LENGTH - LENGTH;
+    private static final float POINT_LENGTH = 2.0001f;
+    private static final float DURATION = 0.1f;
 
-    private static final float SIZE_AMOUNT = 14;
-    private static final float MOVE_AMOUNT = 18;
-    private static final float DURATION = 0.2f;
-    private MoveByAction moveByActionDec = new MoveByAction();
-    private MoveByAction moveByActionInc = new MoveByAction();
-    private SizeByAction sizeByActionDec = new SizeByAction();
-    private SizeByAction sizeByActionInc = new SizeByAction();
-    private ParallelAction parallelActionDec = new ParallelAction(moveByActionDec, sizeByActionDec);
-    private ParallelAction parallelActionInc = new ParallelAction(moveByActionInc, sizeByActionInc);
+    private MoveByAction moveByActionLength = new MoveByAction();
+    private MoveByAction moveByActionMediumLength = new MoveByAction();
+    private MoveToAction moveToBigLength = new MoveToAction();
+
+    private SizeToAction sizeToActionLength = new SizeToAction();
+    private SizeToAction sizeToActionMediumLength = new SizeToAction();
+    private SizeToAction sizeToActionBigLength = new SizeToAction();
+
+    private ParallelAction parallelActionLength = new ParallelAction(moveByActionLength, sizeToActionLength);
+    private ParallelAction parallelActionMediumLength = new ParallelAction(moveByActionMediumLength, sizeToActionMediumLength);
+    private ParallelAction parallelActionBigLength = new ParallelAction(moveToBigLength, sizeToActionBigLength);
+
     private int row;
     private int column;
+
+    @Override
+    public void setRectangleBounds() {
+        float x = getAbsX() + getWidth() / 2 - POINT_LENGTH  / 2;
+        float y = getAbsY() + getHeight() / 2 - POINT_LENGTH  / 2;
+
+        rectangleBounds.set(x, y, POINT_LENGTH, POINT_LENGTH);
+    }
+
+    @Override
+    public float getAbsX() {
+        return getParent().getX() + getX();
+    }
+
+    @Override
+    public float getAbsY() {
+        return getParent().getY() + getY();
+    }
 
     public enum Color {
         AQUA, BLUE, GREEN, LIME, ORANGE, PINK, PURPLE, RED, YELLOW
@@ -66,40 +91,50 @@ public class Panel extends AbstractPanel {
         }
 
         setBounds(x, y, LENGTH, LENGTH);
-        rectangle = new Rectangle(x, y, LENGTH, LENGTH);
     }
 
     public void setActions(int x, int y) {
         this.row = x;
         this.column = y;
 
-        moveByActionDec.setAmount(-column * MOVE_AMOUNT, -row * MOVE_AMOUNT );
-        moveByActionDec.setDuration(DURATION);
+        moveByActionLength.setAmount(-column * MOVE_AMOUNT, -row * MOVE_AMOUNT);
+        moveByActionLength.setDuration(DURATION);
+        sizeToActionLength.setSize(LENGTH, LENGTH);
+        sizeToActionLength.setDuration(DURATION);
 
-        moveByActionInc.setAmount(column * MOVE_AMOUNT, row * MOVE_AMOUNT);
-        moveByActionInc.setDuration(DURATION);
+        moveByActionMediumLength.setAmount(column * MOVE_AMOUNT, row * MOVE_AMOUNT);
+        moveByActionMediumLength.setDuration(DURATION);
+        sizeToActionMediumLength.setSize(MEDIUM_LENGTH, MEDIUM_LENGTH);
+        sizeToActionMediumLength.setDuration(DURATION / 4);
 
-        sizeByActionDec.setAmount(-SIZE_AMOUNT, -SIZE_AMOUNT);
-        sizeByActionDec.setDuration(DURATION);
-
-        sizeByActionInc.setAmount(SIZE_AMOUNT, SIZE_AMOUNT);
-        sizeByActionInc.setDuration(DURATION);
-
-    }
-
-    public void decSize() {
-        parallelActionDec.restart();
-        addAction(parallelActionDec);
+        moveToBigLength.setDuration(DURATION);
+        sizeToActionBigLength.setSize(BIG_LENGTH, BIG_LENGTH);
+        sizeToActionBigLength.setDuration(DURATION / 4);
     }
 
     public void incSize() {
-        parallelActionInc.restart();
-        addAction(parallelActionInc);
+        parallelActionMediumLength.restart();
+        addAction(parallelActionMediumLength);
     }
 
-    /*public boolean isInideField() {
-        if ((getX() + getWidth() / 2 > 0)) {
+    public void decSize() {
+        parallelActionLength.restart();
+        addAction(parallelActionLength);
+    }
 
-        }
-    }*/
+    public void stickPanel(Cell cell) {
+        moveToBigLength.setPosition(cell.getAbsX() - getParent().getX(), cell.getAbsY() - getParent().getY());
+        moveToBigLength.restart();
+        sizeToActionBigLength.restart();
+
+        addAction(parallelActionBigLength);
+    }
+
+    public boolean isInsideCell(Cell cell) {
+        if (!cell.isFull() && rectangleBounds.overlaps(cell.getRectangleBounds()))
+            return true;
+        else
+            return false;
+    }
+
 }
