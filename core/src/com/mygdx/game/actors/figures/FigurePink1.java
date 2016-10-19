@@ -1,7 +1,7 @@
 package com.mygdx.game.actors.figures;
 
-import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
+import com.mygdx.game.screens.PlayScreen;
 
 /**
  * Created by Sergey on 05.10.2016.
@@ -9,8 +9,8 @@ import com.mygdx.game.actors.panels.Panel;
 
 public class FigurePink1 extends Figure {
 
-    public FigurePink1(Field field) {
-        super(field);
+    public FigurePink1(PlayScreen screen) {
+        super(screen);
         for (int i = 0; i < 4; ++i) {
             panel = new Panel(Panel.Color.PINK, i * PANEL_SPACING, PADDING_Y);
             panel.setActions(0, i);

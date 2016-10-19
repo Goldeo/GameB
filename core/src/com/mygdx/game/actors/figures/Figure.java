@@ -1,5 +1,6 @@
 package com.mygdx.game.actors.figures;
 
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -9,6 +10,7 @@ import com.mygdx.game.actors.panels.Cell;
 import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
 import com.mygdx.game.listeners.MyDragListener;
+import com.mygdx.game.screens.PlayScreen;
 
 import java.util.ArrayList;
 
@@ -24,13 +26,17 @@ public abstract class Figure extends Group {
     protected static final float PADDING_Y = 30;
     protected static final float SPACING = 2;
     protected static final float PANEL_SPACING = SPACING + Panel.LENGTH;
+
+    private PlayScreen screen;
     private Field field;
     private Vector2 standardPosition = new Vector2();
     private MoveToAction moveToAction = new MoveToAction();
 
-    public Figure(Field field) {
-        this.field = field;
-        addListener(new MyDragListener(this));
+    public Figure(PlayScreen screen) {
+        this.screen = screen;
+        this.field = screen.getField();
+        toFront();
+        addListener(new MyDragListener(screen, this));
     }
 
     public int getChildrenCount() {
@@ -41,48 +47,48 @@ public abstract class Figure extends Group {
         return field;
     }
 
-    public static Figure create(int type, Field field) {
+    public static Figure create(int type, PlayScreen screen) {
         switch (type) {
             case 0:
-                return new FigureAqua(field);
+                return new FigureAqua(screen);
             case 1:
-                return new FigureBlue1(field);
+                return new FigureBlue1(screen);
             case 2:
-                return new FigureBlue2(field);
+                return new FigureBlue2(screen);
             case 3:
-                return new FigureBlue3(field);
+                return new FigureBlue3(screen);
             case 4:
-                return new FigureBlue4(field);
+                return new FigureBlue4(screen);
             case 5:
-                return new FigureGreen1(field);
+                return new FigureGreen1(screen);
             case 6:
-                return new FigureGreen2(field);
+                return new FigureGreen2(screen);
             case 7:
-                return new FigureGreen3(field);
+                return new FigureGreen3(screen);
             case 8:
-                return new FigureGreen4(field);
+                return new FigureGreen4(screen);
             case 9:
-                return new FigureLime(field);
+                return new FigureLime(screen);
             case 10:
-                return new FigureOrange1(field);
+                return new FigureOrange1(screen);
             case 11:
-                return new FigureOrange2(field);
+                return new FigureOrange2(screen);
             case 12:
-                return new FigurePink1(field);
+                return new FigurePink1(screen);
             case 13:
-                return new FigurePink2(field);
+                return new FigurePink2(screen);
             case 14:
-                return new FigurePurple(field);
+                return new FigurePurple(screen);
             case 15:
-                return new FigureRed1(field);
+                return new FigureRed1(screen);
             case 16:
-                return new FigureRed2(field);
+                return new FigureRed2(screen);
             case 17:
-                return new FigureYellow1(field);
+                return new FigureYellow1(screen);
             case 18:
-                return new FigureYellow2(field);
+                return new FigureYellow2(screen);
             default:
-                return new FigurePurple(field);
+                return new FigurePurple(screen);
         }
     }
 
@@ -133,17 +139,21 @@ public abstract class Figure extends Group {
             }
         }
 
-        if (n == getChildrenCount()) stickFigure(panels, cells);
-            else
-        goToStandardPosition();
+        if (getChildrenCount() == n) {
+            stickFigure(panels, cells);
+
+        }
+        else
+            goToStandardPosition();
     }
 
     private void stickFigure(ArrayList<Panel> panels, ArrayList<Cell> cells) {
-
         for (int i = 0; i < panels.size(); ++i) {
             panels.get(i).stickPanel(cells.get(i));
-            cells.get(i).setFull(true);
         }
+
+        getParent().removeActor(this);
         setTouchable(Touchable.disabled);
+        screen.getFigureCreator().setFigures();
     }
 }

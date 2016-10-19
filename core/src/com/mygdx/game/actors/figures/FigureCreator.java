@@ -1,7 +1,10 @@
 package com.mygdx.game.actors.figures;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.PlayScreen;
 
 import java.util.Random;
 
@@ -9,50 +12,47 @@ import java.util.Random;
  * Created by Sergey on 06.10.2016.
  */
 
-public class FigureCreator {
+public class FigureCreator extends Group {
 
-    private static final float FUGIRES_COUNT = 3;
-    private static final float SPACING = 140;
-    private float leftSpacing;
-    private float bottomSpacing;
-    private Field field;
-
-    private Figure figure1, figure2, figure3;
-    private GameScreen screen;
+    private static final int FUGIRES_COUNT = 3;
+    private Figure[] figures = new Figure[3];
+    private PlayScreen screen;
     private Random random = new Random();
 
-    public FigureCreator(GameScreen screen, Field field, float leftSpacing, float bottomSpacing) {
+    public FigureCreator(PlayScreen screen, float x, float y) {
         this.screen = screen;
-        this.field = field;
-        this.leftSpacing = leftSpacing;
-        this.bottomSpacing = bottomSpacing;
+        setPosition(x, y);
+        setSize(398, 120);
         setFigures();
     }
 
+    public int getFuguresCount() {
+        return getChildren().size;
+    }
+
     public void setFigures() {
-        figure1 = randomFigure();
-        figure2 = randomFigure();
-        figure3 = randomFigure();
 
-        figure1.setPosition(leftSpacing - SPACING - figure1.getWidth() / 2,
-                bottomSpacing  - figure1.getHeight() / 2);
-        figure2.setPosition(leftSpacing - figure2.getWidth() / 2,
-                bottomSpacing  - figure2.getHeight() / 2);
-        figure3.setPosition(leftSpacing + SPACING - figure3.getWidth() / 2,
-                bottomSpacing  - figure3.getHeight() / 2);
+        if (getFuguresCount() == 0) {
 
-        figure1.setStandartPosition();
-        figure2.setStandartPosition();
-        figure3.setStandartPosition();
+            for (int i = 0; i < FUGIRES_COUNT; ++i) {
+                figures[i] = new FigureLime(screen);
+            }
 
-        screen.getStage().addActor(figure1);
-        screen.getStage().addActor(figure2);
-        screen.getStage().addActor(figure3);
+            figures[0].setPosition(20, getHeight() - figures[0].getHeight() / 2);
+            figures[1].setPosition(getWidth() / 2 - figures[1].getWidth() / 2, getHeight() - figures[1].getHeight() / 2);
+            figures[2].setPosition(getWidth() - 20 - figures[2].getWidth(), getHeight() - figures[2].getHeight() / 2);
+
+            for (int i = 0; i < FUGIRES_COUNT; ++i) {
+                figures[i].setStandartPosition();
+                addActor(figures[i]);
+            }
+        }
+
     }
 
     private Figure randomFigure() {
         int randomN = random.nextInt(19);
-        return Figure.create(randomN, field);
+        return Figure.create(randomN, screen);
     }
 
 }

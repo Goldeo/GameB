@@ -1,8 +1,14 @@
 package com.mygdx.game.listeners;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
+import com.mygdx.game.actors.buttons.PauseButton;
+import com.mygdx.game.actors.buttons.PlayButton;
 import com.mygdx.game.actors.figures.Figure;
+import com.mygdx.game.actors.panels.Field;
+import com.mygdx.game.actors.panels.Panel;
+import com.mygdx.game.screens.PlayScreen;
 
 /**
  * Created by Sergey on 11.10.2016.
@@ -11,42 +17,35 @@ import com.mygdx.game.actors.figures.Figure;
 public class MyDragListener extends DragListener {
 
     private Figure figure;
+    private Field field;
+    private PauseButton button;
 
-    public MyDragListener(Figure figure) {
+    public MyDragListener(PlayScreen screen, Figure figure) {
         this.figure = figure;
+        this.field = screen.getField();
+        this.button = screen.getPauseButton();
     }
 
     @Override
     public void drag(InputEvent event, float x, float y, int pointer) {
         super.drag(event, x, y, pointer);
+
         figure.setPosition(figure.getX() - figure.getWidth() / 2 + x, figure.getY() + y);
         figure.repositionPanels();
     }
 
     @Override
-    public void dragStart(InputEvent event, float x, float y, int pointer) {
-        super.dragStart(event, x, y, pointer);
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         figure.incSize();
         figure.repositionPanels();
+        return super.touchDown(event, x, y, pointer, button);
     }
 
     @Override
-    public void dragStop(InputEvent event, float x, float y, int pointer) {
-        super.dragStop(event, x, y, pointer);
-        //figure.goToStandardPosition();
+    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+        super.touchUp(event, x, y, pointer, button);
         figure.repositionPanels();
         figure.check();
-    }
-
-    @Override
-    public void touchDragged(InputEvent event, float x, float y, int pointer) {
-        super.touchDragged(event, x, y, pointer);
-
-    }
-
-    @Override
-    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        return super.touchDown(event, x, y, pointer, button);
-
+        field.check();
     }
 }

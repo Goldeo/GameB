@@ -1,8 +1,7 @@
 package com.mygdx.game.actors.figures;
 
-import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
+import com.mygdx.game.screens.PlayScreen;
 
 /**
  * Created by Sergey on 05.10.2016.
@@ -10,8 +9,8 @@ import com.mygdx.game.actors.panels.Panel;
 
 public class FigureGreen1 extends Figure {
 
-    public FigureGreen1(Field field) {
-        super(field);
+    public FigureGreen1(PlayScreen screen) {
+        super(screen);
         panel = new Panel(Panel.Color.GREEN, 0, PADDING_Y);
         panel.setActions(0, 0);
         addActor(panel);

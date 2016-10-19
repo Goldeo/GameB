@@ -1,6 +1,7 @@
 package com.mygdx.game.actors.figures;
 
 import com.mygdx.game.actors.panels.*;
+import com.mygdx.game.screens.PlayScreen;
 
 /**
  * Created by Sergey on 05.10.2016.
@@ -8,8 +9,8 @@ import com.mygdx.game.actors.panels.*;
 
 public class FigureAqua extends Figure {
 
-    public FigureAqua(Field field) {
-        super(field);
+    public FigureAqua(PlayScreen screen) {
+        super(screen);
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j) {
                 panel = new Panel(Panel.Color.AQUA, i * PANEL_SPACING, j * PANEL_SPACING + PADDING_Y);

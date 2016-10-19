@@ -1,5 +1,7 @@
 package com.mygdx.game.actors.panels;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.GameB;
 
 /**
@@ -9,19 +11,45 @@ import com.mygdx.game.GameB;
 public class Cell extends AbstractPanel {
 
     public static final float LENGTH = 38;
-    private boolean isFull = false;
+    private Field field;
+    private int row;
+    private int column;
 
-    public Cell() {
+    public Actor getPanel() {
+        if (getChildren().first() != null)
+            return getChildren().first();
+        else
+            return null;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public Cell(Field field) {
+        this.field = field;
         texture = GameB.atlas.findRegion("grayPanel");
         setSize(LENGTH, LENGTH);
     }
 
     public boolean isFull() {
-        return isFull;
-    }
-
-    public void setFull(boolean full) {
-        isFull = full;
+        return (getChildren().size > 0);
     }
 
     @Override
@@ -31,11 +59,17 @@ public class Cell extends AbstractPanel {
 
     @Override
     public float getAbsX() {
-        return getParent().getX() + getX();
+        return getField().getX() + getX();
     }
 
     @Override
     public float getAbsY() {
-        return getParent().getY() + getY();
+        return getField().getY() + getY();
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
+        super.draw(batch, parentAlpha);
     }
 }

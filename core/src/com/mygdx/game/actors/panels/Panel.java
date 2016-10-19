@@ -1,8 +1,11 @@
 package com.mygdx.game.actors.panels;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
+import com.badlogic.gdx.scenes.scene2d.actions.RemoveActorAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.mygdx.game.GameB;
 
@@ -18,18 +21,25 @@ public class Panel extends AbstractPanel {
     private static final float MOVE_AMOUNT = BIG_LENGTH - LENGTH;
     private static final float POINT_LENGTH = 2.0001f;
     private static final float DURATION = 0.1f;
+    private static final float NO_DURATION = 0;
 
     private MoveByAction moveByActionLength = new MoveByAction();
     private MoveByAction moveByActionMediumLength = new MoveByAction();
-    private MoveToAction moveToBigLength = new MoveToAction();
+    private MoveToAction moveToActionBigLength = new MoveToAction();
+    private MoveByAction moveByActionDelete = new MoveByAction();
 
     private SizeToAction sizeToActionLength = new SizeToAction();
     private SizeToAction sizeToActionMediumLength = new SizeToAction();
     private SizeToAction sizeToActionBigLength = new SizeToAction();
+    private SizeToAction sizeToActionDelete = new SizeToAction();
+
+    private RemoveActorAction removeActorAction = new RemoveActorAction();
 
     private ParallelAction parallelActionLength = new ParallelAction(moveByActionLength, sizeToActionLength);
     private ParallelAction parallelActionMediumLength = new ParallelAction(moveByActionMediumLength, sizeToActionMediumLength);
-    private ParallelAction parallelActionBigLength = new ParallelAction(moveToBigLength, sizeToActionBigLength);
+    private ParallelAction parallelActionBigLength = new ParallelAction(moveToActionBigLength, sizeToActionBigLength);
+    private ParallelAction parallelActionDelete = new ParallelAction(moveByActionDelete, sizeToActionDelete);
+    private SequenceAction sequenceActionDelete = new SequenceAction(parallelActionDelete, removeActorAction);
 
     private int row;
     private int column;
@@ -44,12 +54,18 @@ public class Panel extends AbstractPanel {
 
     @Override
     public float getAbsX() {
-        return getParent().getX() + getX();
+        if (getParent().getParent() != null) {
+            return getParent().getX() + getParent().getParent().getX() + getX();
+        }
+        else return 0;
     }
 
     @Override
     public float getAbsY() {
-        return getParent().getY() + getY();
+        if (getParent().getParent() != null) {
+            return getParent().getY() + getParent().getParent().getY() + getY();
+        }
+        else return 0;
     }
 
     public enum Color {
@@ -98,18 +114,23 @@ public class Panel extends AbstractPanel {
         this.column = y;
 
         moveByActionLength.setAmount(-column * MOVE_AMOUNT, -row * MOVE_AMOUNT);
-        moveByActionLength.setDuration(DURATION);
+        moveByActionLength.setDuration(NO_DURATION);
         sizeToActionLength.setSize(LENGTH, LENGTH);
-        sizeToActionLength.setDuration(DURATION);
+        sizeToActionLength.setDuration(NO_DURATION);
 
         moveByActionMediumLength.setAmount(column * MOVE_AMOUNT, row * MOVE_AMOUNT);
-        moveByActionMediumLength.setDuration(DURATION);
+        moveByActionMediumLength.setDuration(NO_DURATION);
         sizeToActionMediumLength.setSize(MEDIUM_LENGTH, MEDIUM_LENGTH);
-        sizeToActionMediumLength.setDuration(DURATION / 4);
+        sizeToActionMediumLength.setDuration(NO_DURATION);
 
-        moveToBigLength.setDuration(DURATION);
+        moveToActionBigLength.setDuration(DURATION);
         sizeToActionBigLength.setSize(BIG_LENGTH, BIG_LENGTH);
-        sizeToActionBigLength.setDuration(DURATION / 4);
+        sizeToActionBigLength.setDuration(0);
+
+        moveByActionDelete.setAmount(BIG_LENGTH / 2, BIG_LENGTH / 2);
+        moveByActionDelete.setDuration(DURATION);
+        sizeToActionDelete.setSize(0, 0);
+        sizeToActionDelete.setDuration(DURATION);
     }
 
     public void incSize() {
@@ -122,19 +143,28 @@ public class Panel extends AbstractPanel {
         addAction(parallelActionLength);
     }
 
-    public void stickPanel(Cell cell) {
-        moveToBigLength.setPosition(cell.getAbsX() - getParent().getX(), cell.getAbsY() - getParent().getY());
-        moveToBigLength.restart();
-        sizeToActionBigLength.restart();
+    public boolean isInsideCell(Cell cell) {
+        return (!cell.isFull() && rectangleBounds.overlaps(cell.getRectangleBounds()));
+    }
 
+    public void stickPanel(Cell cell) {
+        setPosition(getAbsX() - cell.getAbsX(), getAbsY() - cell.getAbsY());
+        cell.addActor(this);
+        moveToActionBigLength.setPosition(0, 0);
+        moveToActionBigLength.restart();
+        sizeToActionBigLength.restart();
         addAction(parallelActionBigLength);
     }
 
-    public boolean isInsideCell(Cell cell) {
-        if (!cell.isFull() && rectangleBounds.overlaps(cell.getRectangleBounds()))
-            return true;
-        else
-            return false;
+    public void delete() {
+        moveByActionDelete.restart();
+        sizeToActionDelete.restart();
+        addAction(sequenceActionDelete);
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
 
 }

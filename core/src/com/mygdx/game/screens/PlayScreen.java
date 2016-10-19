@@ -5,13 +5,27 @@ import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.GameB;
 import com.mygdx.game.actors.buttons.PauseButton;
 import com.mygdx.game.actors.figures.FigureCreator;
+import com.mygdx.game.actors.panels.Line;
 import com.mygdx.game.actors.panels.Field;
+import com.mygdx.game.actors.panels.HorizontalLine;
 
 public class PlayScreen extends GameScreen {
 
     private Field field;
     private PauseButton pauseButton;
     private FigureCreator figureCreator;
+
+    public Field getField() {
+        return field;
+    }
+
+    public FigureCreator getFigureCreator() {
+        return figureCreator;
+    }
+
+    public PauseButton getPauseButton() {
+        return pauseButton;
+    }
 
     public PlayScreen(GameB game) {
         super(game);
@@ -20,7 +34,8 @@ public class PlayScreen extends GameScreen {
     @Override
     protected void initialization() {
         pauseButton = new PauseButton(this);
-        field = new Field(GameB.WIDTH / 2, GameB.HEIGHT / 2);
+        field = new Field(this, GameB.WIDTH / 2, GameB.HEIGHT / 2);
+        figureCreator = new FigureCreator(this, 41, 0);
     }
 
     @Override
@@ -29,8 +44,7 @@ public class PlayScreen extends GameScreen {
 
         stage.addActor(pauseButton);
         stage.addActor(field);
-
-        figureCreator = new FigureCreator(this, field, GameB.WIDTH / 2, 100);
+        stage.addActor(figureCreator);
     }
 
     @Override
