@@ -11,15 +11,15 @@ public class FigureGreen3 extends Figure {
 
     public FigureGreen3(PlayScreen screen) {
         super(screen);
-        panel = new Panel(Panel.Color.GREEN, 0, PADDING_Y);
+        panel = new Panel(screen, Panel.Color.GREEN, 0, PADDING_Y);
         panel.setActions(0, 0);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.GREEN, PANEL_SPACING, PADDING_Y);
+        panel = new Panel(screen, Panel.Color.GREEN, PANEL_SPACING, PADDING_Y);
         panel.setActions(0, 1);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.GREEN, PANEL_SPACING, PANEL_SPACING + PADDING_Y);
+        panel = new Panel(screen, Panel.Color.GREEN, PANEL_SPACING, PANEL_SPACING + PADDING_Y);
         panel.setActions(1, 1);
         addActor(panel);
 

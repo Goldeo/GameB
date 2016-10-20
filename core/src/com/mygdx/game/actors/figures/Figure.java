@@ -1,6 +1,6 @@
 package com.mygdx.game.actors.figures;
 
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -41,10 +41,6 @@ public abstract class Figure extends Group {
 
     public int getChildrenCount() {
         return getChildren().size;
-    }
-
-    public Field getField() {
-        return field;
     }
 
     public static Figure create(int type, PlayScreen screen) {
@@ -141,7 +137,6 @@ public abstract class Figure extends Group {
 
         if (getChildrenCount() == n) {
             stickFigure(panels, cells);
-
         }
         else
             goToStandardPosition();
@@ -152,8 +147,9 @@ public abstract class Figure extends Group {
             panels.get(i).stickPanel(cells.get(i));
         }
 
+
         getParent().removeActor(this);
         setTouchable(Touchable.disabled);
-        screen.getFigureCreator().setFigures();
+        screen.getFigureGroup().setFigures();
     }
 }

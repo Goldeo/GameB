@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.RemoveActorAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.mygdx.game.GameB;
+import com.mygdx.game.actors.figures.Figure;
+import com.mygdx.game.screens.PlayScreen;
 
 /**
  * Created by Sergey on 05.10.2016.
@@ -22,6 +24,7 @@ public class Panel extends AbstractPanel {
     private static final float POINT_LENGTH = 2.0001f;
     private static final float DURATION = 0.1f;
     private static final float NO_DURATION = 0;
+    private PlayScreen screen;
 
     private MoveByAction moveByActionLength = new MoveByAction();
     private MoveByAction moveByActionMediumLength = new MoveByAction();
@@ -72,7 +75,8 @@ public class Panel extends AbstractPanel {
         AQUA, BLUE, GREEN, LIME, ORANGE, PINK, PURPLE, RED, YELLOW
     }
 
-    public Panel(Color color, float x, float y) {
+    public Panel(PlayScreen screen, Color color, float x, float y) {
+        this.screen = screen;
 
         switch (color) {
             case LIME:
@@ -109,16 +113,16 @@ public class Panel extends AbstractPanel {
         setBounds(x, y, LENGTH, LENGTH);
     }
 
-    public void setActions(int x, int y) {
-        this.row = x;
-        this.column = y;
+    public void setActions(int row, int column) {
+        this.row = row;
+        this.column = column;
 
-        moveByActionLength.setAmount(-column * MOVE_AMOUNT, -row * MOVE_AMOUNT);
+        moveByActionLength.setAmount(-this.column * MOVE_AMOUNT, -this.row * MOVE_AMOUNT);
         moveByActionLength.setDuration(NO_DURATION);
         sizeToActionLength.setSize(LENGTH, LENGTH);
         sizeToActionLength.setDuration(NO_DURATION);
 
-        moveByActionMediumLength.setAmount(column * MOVE_AMOUNT, row * MOVE_AMOUNT);
+        moveByActionMediumLength.setAmount(this.column * MOVE_AMOUNT, this.row * MOVE_AMOUNT);
         moveByActionMediumLength.setDuration(NO_DURATION);
         sizeToActionMediumLength.setSize(MEDIUM_LENGTH, MEDIUM_LENGTH);
         sizeToActionMediumLength.setDuration(NO_DURATION);
@@ -150,6 +154,7 @@ public class Panel extends AbstractPanel {
     public void stickPanel(Cell cell) {
         setPosition(getAbsX() - cell.getAbsX(), getAbsY() - cell.getAbsY());
         cell.addActor(this);
+        screen.getScoreLabel().addPoints(1);
         moveToActionBigLength.setPosition(0, 0);
         moveToActionBigLength.restart();
         sizeToActionBigLength.restart();
@@ -157,6 +162,7 @@ public class Panel extends AbstractPanel {
     }
 
     public void delete() {
+        screen.getScoreLabel().addPoints(1);
         moveByActionDelete.restart();
         sizeToActionDelete.restart();
         addAction(sequenceActionDelete);

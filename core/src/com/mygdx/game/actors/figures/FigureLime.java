@@ -13,7 +13,7 @@ public class FigureLime extends Figure {
         super(screen);
         for (int i = 0; i < 2; ++i)
             for (int j = 0; j < 2; ++j) {
-                panel = new Panel(Panel.Color.LIME, i * PANEL_SPACING, j * PANEL_SPACING + PADDING_Y);
+                panel = new Panel(screen, Panel.Color.LIME, i * PANEL_SPACING, j * PANEL_SPACING + PADDING_Y);
                 panel.setActions(j, i);
                 addActor(panel);
             }

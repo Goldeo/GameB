@@ -12,7 +12,7 @@ public class FigureYellow1 extends Figure {
     public FigureYellow1(PlayScreen screen) {
         super(screen);
         for (int i = 0; i < 2; ++i) {
-            panel = new Panel(Panel.Color.YELLOW, i * PANEL_SPACING, PADDING_Y);
+            panel = new Panel(screen, Panel.Color.YELLOW, i * PANEL_SPACING, PADDING_Y);
             panel.setActions(0, i);
             addActor(panel);
         }

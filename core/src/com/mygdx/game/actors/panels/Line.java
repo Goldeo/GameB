@@ -28,7 +28,7 @@ public abstract class Line {
     public void delete() {
         for (int i = 0; i < Field.CELL_COUNT; ++i) {
             if (cells[i].isFull())
-                ((Panel)cells[i].getChildren().first()).delete();
+                ((Panel) cells[i].getChildren().first()).delete();
         }
     }
 

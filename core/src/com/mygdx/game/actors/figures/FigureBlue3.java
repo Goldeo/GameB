@@ -11,23 +11,23 @@ public class FigureBlue3 extends Figure {
 
     public FigureBlue3(PlayScreen screen) {
         super(screen);
-        panel = new Panel(Panel.Color.BLUE, 0, PADDING_Y);
+        panel = new Panel(screen, Panel.Color.BLUE, 0, PADDING_Y);
         panel.setActions(0, 0);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.BLUE, PANEL_SPACING, PADDING_Y);
+        panel = new Panel(screen, Panel.Color.BLUE, PANEL_SPACING, PADDING_Y);
         panel.setActions(0, 1);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.BLUE, 2 * PANEL_SPACING, PADDING_Y);
+        panel = new Panel(screen, Panel.Color.BLUE, 2 * PANEL_SPACING, PADDING_Y);
         panel.setActions(0, 2);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.BLUE, 2 * PANEL_SPACING, PANEL_SPACING + PADDING_Y);
+        panel = new Panel(screen, Panel.Color.BLUE, 2 * PANEL_SPACING, PANEL_SPACING + PADDING_Y);
         panel.setActions(1, 2);
         addActor(panel);
 
-        panel = new Panel(Panel.Color.BLUE, 2 * PANEL_SPACING, 2 * PANEL_SPACING + PADDING_Y);
+        panel = new Panel(screen, Panel.Color.BLUE, 2 * PANEL_SPACING, 2 * PANEL_SPACING + PADDING_Y);
         panel.setActions(2, 2);
         addActor(panel);
 
