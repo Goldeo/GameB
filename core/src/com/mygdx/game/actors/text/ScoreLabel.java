@@ -1,29 +1,31 @@
 package com.mygdx.game.actors.text;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.mygdx.game.GameB;
 
 /**
  * Created by Sergey on 21.10.2016.
  */
 
-public class ScoreLabel extends Label {
-
-    private int points;
+public class ScoreLabel extends AbstractLabel {
 
     public ScoreLabel(CharSequence text, Skin skin, String fontName, Color color) {
         super(text, skin, fontName, color);
     }
 
-    public void addPoints(int addingPoints) {
-        points += addingPoints;
-        setText(String.valueOf(points));
+    public void setToZero() {
+        points = 0;
     }
 
     @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
+    public void savePoints() {
+        GameB.prefs.putLong("Score", points);
+        GameB.prefs.flush();
+    }
+
+    @Override
+    public void loadPoints() {
+        setPoints(GameB.prefs.getLong("Score"));
     }
 }

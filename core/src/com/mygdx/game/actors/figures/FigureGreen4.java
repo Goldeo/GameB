@@ -11,21 +11,19 @@ public class FigureGreen4 extends Figure {
 
     public FigureGreen4(PlayScreen screen) {
         super(screen);
-        panel = new Panel(screen, Panel.Color.GREEN, PANEL_SPACING, PADDING_Y);
+        panel = new Panel(screen, Panel.Color.GREEN, PANEL_WIDTH + MEDIUM_PADDING, BIG_PADDING);
         panel.setActions(0, 1);
         addActor(panel);
 
-        panel = new Panel(screen, Panel.Color.GREEN, PANEL_SPACING, PANEL_SPACING + PADDING_Y);
+        panel = new Panel(screen, Panel.Color.GREEN, PANEL_WIDTH + MEDIUM_PADDING, PANEL_WIDTH + BIG_PADDING);
         panel.setActions(1, 1);
         addActor(panel);
 
-        panel = new Panel(screen, Panel.Color.GREEN, 0, PANEL_SPACING + PADDING_Y);
+        panel = new Panel(screen, Panel.Color.GREEN, MEDIUM_PADDING, PANEL_WIDTH + BIG_PADDING);
         panel.setActions(1, 0);
         addActor(panel);
 
-        width = 2 * Panel.LENGTH + Figure.SPACING;
-        height = 2 * Panel.LENGTH + Figure.SPACING + 2 * PADDING_Y;
-        setSize(width, height);
+        setSize(2, 2, MEDIUM_PADDING, BIG_PADDING);
     }
 
 }

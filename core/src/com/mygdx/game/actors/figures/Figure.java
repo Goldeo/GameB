@@ -1,6 +1,5 @@
 package com.mygdx.game.actors.figures;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -21,11 +20,16 @@ import java.util.ArrayList;
 public abstract class Figure extends Group {
 
     protected Panel panel;
-    protected float width;
-    protected float height;
-    protected static final float PADDING_Y = 30;
-    protected static final float SPACING = 2;
-    protected static final float PANEL_SPACING = SPACING + Panel.LENGTH;
+    int panelCountWidth;
+    int panelsCountHeight;
+    boolean panelsArray[][];
+    static final float NO_PADDING = 0;
+    static final float LITTLE_PADDING = 15;
+    static final float PADDING = 20;
+    static final float MEDIUM_PADDING = 25;
+    static final float BIG_PADDING = 30;
+    private static final float SPACING = 2;
+    protected static final float PANEL_WIDTH = SPACING + Panel.LENGTH;
 
     private PlayScreen screen;
     private Field field;
@@ -39,7 +43,8 @@ public abstract class Figure extends Group {
         addListener(new MyDragListener(screen, this));
     }
 
-    public int getChildrenCount() {
+
+    public int getPanelsCount() {
         return getChildren().size;
     }
 
@@ -135,7 +140,7 @@ public abstract class Figure extends Group {
             }
         }
 
-        if (getChildrenCount() == n) {
+        if (getPanelsCount() == n) {
             stickFigure(panels, cells);
         }
         else
@@ -145,11 +150,23 @@ public abstract class Figure extends Group {
     private void stickFigure(ArrayList<Panel> panels, ArrayList<Cell> cells) {
         for (int i = 0; i < panels.size(); ++i) {
             panels.get(i).stickPanel(cells.get(i));
+            cells.get(i).setFull(true);
         }
 
-
         getParent().removeActor(this);
+
         setTouchable(Touchable.disabled);
         screen.getFigureGroup().setFigures();
+        field.check(cells);
+    }
+
+    protected void setSize(int panelsCountWidth, int panelsCountHeight, float paddingWidth, float paddingHeight) {
+        this.panelCountWidth = panelsCountWidth;
+        this.panelsCountHeight = panelsCountHeight;
+        panelsArray = new boolean[panelsCountWidth][panelsCountHeight];
+
+        float w = panelsCountWidth * Panel.LENGTH + (panelsCountWidth - 1) * SPACING + 2 * paddingWidth;
+        float h = panelsCountHeight * Panel.LENGTH + (panelsCountHeight - 1) * SPACING + 2 * paddingHeight;
+        setSize(w, h);
     }
 }

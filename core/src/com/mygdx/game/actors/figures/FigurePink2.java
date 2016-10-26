@@ -12,14 +12,12 @@ public class FigurePink2 extends Figure {
     public FigurePink2(PlayScreen screen) {
         super(screen);
         for (int i = 0; i < 4; ++i) {
-            panel = new Panel(screen, Panel.Color.PINK, PADDING_Y, i * PANEL_SPACING + PADDING_Y);
+            panel = new Panel(screen, Panel.Color.PINK, BIG_PADDING, i * PANEL_WIDTH + BIG_PADDING);
             panel.setActions(i, 0);
             addActor(panel);
         }
 
-        width = Panel.LENGTH + 2 * PADDING_Y;
-        height = 4 * Panel.LENGTH + 3 * SPACING + 2 * PADDING_Y;
-        setSize(width, height);
+        setSize(1, 4, BIG_PADDING, BIG_PADDING);
     }
 
 }

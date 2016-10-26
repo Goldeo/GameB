@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.RemoveActorAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.mygdx.game.GameB;
-import com.mygdx.game.actors.figures.Figure;
 import com.mygdx.game.screens.PlayScreen;
 
 /**
@@ -43,9 +42,6 @@ public class Panel extends AbstractPanel {
     private ParallelAction parallelActionBigLength = new ParallelAction(moveToActionBigLength, sizeToActionBigLength);
     private ParallelAction parallelActionDelete = new ParallelAction(moveByActionDelete, sizeToActionDelete);
     private SequenceAction sequenceActionDelete = new SequenceAction(parallelActionDelete, removeActorAction);
-
-    private int row;
-    private int column;
 
     @Override
     public void setRectangleBounds() {
@@ -155,13 +151,14 @@ public class Panel extends AbstractPanel {
         setPosition(getAbsX() - cell.getAbsX(), getAbsY() - cell.getAbsY());
         cell.addActor(this);
         screen.getScoreLabel().addPoints(1);
+
         moveToActionBigLength.setPosition(0, 0);
         moveToActionBigLength.restart();
         sizeToActionBigLength.restart();
         addAction(parallelActionBigLength);
     }
 
-    public void delete() {
+    public void clearCell() {
         screen.getScoreLabel().addPoints(1);
         moveByActionDelete.restart();
         sizeToActionDelete.restart();

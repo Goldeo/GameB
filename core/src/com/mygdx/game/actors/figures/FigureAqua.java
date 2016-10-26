@@ -11,16 +11,16 @@ public class FigureAqua extends Figure {
 
     public FigureAqua(PlayScreen screen) {
         super(screen);
+
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 3; ++j) {
-                panel = new Panel(screen, Panel.Color.AQUA, i * PANEL_SPACING, j * PANEL_SPACING + PADDING_Y);
+                panel = new Panel(screen, Panel.Color.AQUA, i * PANEL_WIDTH + LITTLE_PADDING, j * PANEL_WIDTH + BIG_PADDING);
                 panel.setActions(j, i);
                 addActor(panel);
             }
 
-        width = 3 * Panel.LENGTH + 2 * Figure.SPACING;
-        height = 3 * Panel.LENGTH + 2 * Figure.SPACING + 2 * PADDING_Y;
-        setSize(width, height);
+        setSize(3, 3, LITTLE_PADDING, BIG_PADDING);
+
     }
 
 }

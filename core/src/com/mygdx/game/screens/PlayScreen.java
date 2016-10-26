@@ -3,11 +3,12 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.mygdx.game.GameB;
 import com.mygdx.game.actors.buttons.PauseButton;
 import com.mygdx.game.actors.figures.FigureGroup;
 import com.mygdx.game.actors.panels.Field;
+import com.mygdx.game.actors.text.AbstractLabel;
+import com.mygdx.game.actors.text.RecordLabel;
 import com.mygdx.game.actors.text.ScoreLabel;
 
 public class PlayScreen extends GameScreen {
@@ -16,6 +17,7 @@ public class PlayScreen extends GameScreen {
     private PauseButton pauseButton;
     private FigureGroup figureGroup;
     private ScoreLabel scoreLabel;
+    private RecordLabel recordLabel;
 
     public Field getField() {
         return field;
@@ -29,18 +31,19 @@ public class PlayScreen extends GameScreen {
         return pauseButton;
     }
 
-    public ScoreLabel getScoreLabel() {
+    public AbstractLabel getScoreLabel() {
         return scoreLabel;
     }
 
-    public PlayScreen(GameB game) {
+    public PlayScreen(final GameB game) {
         super(game);
     }
 
     @Override
     protected void initialization() {
         pauseButton = new PauseButton(this);
-        scoreLabel = new ScoreLabel("0", GameB.skin, "default-font", new Color(1, 0, 0, 1));
+        scoreLabel = new ScoreLabel("0", GameB.skin, "default-font", new Color(0, 1, 0, 1));
+        recordLabel = new RecordLabel("0", GameB.skin, "default-font", new Color(0, 0, 1, 1));
 
         field = new Field(this, GameB.WIDTH / 2, GameB.HEIGHT / 2);
         figureGroup = new FigureGroup(this, 41, 0);
@@ -49,11 +52,13 @@ public class PlayScreen extends GameScreen {
     @Override
     protected void setSettings() {
         pauseButton.setPosition(GameB.WIDTH - pauseButton.getWidth() - 15, GameB.HEIGHT - pauseButton.getHeight() - 10);
-        scoreLabel.setPosition(100, 600);
-        scoreLabel.setColor(0, 1, 0, 1);
+        scoreLabel.setPosition(100, 620);
+        recordLabel.setScoreLabel(scoreLabel);
+        recordLabel.setPosition(300, 620);
 
         stage.addActor(pauseButton);
         stage.addActor(scoreLabel);
+        stage.addActor(recordLabel);
         stage.addActor(field);
         stage.addActor(figureGroup);
     }
@@ -65,14 +70,17 @@ public class PlayScreen extends GameScreen {
         super.render(delta);
     }
 
-
     @Override
     public void pause() {
+        scoreLabel.savePoints();
+        recordLabel.savePoints();
         super.pause();
     }
 
     @Override
     public void resume() {
+        scoreLabel.savePoints();
+        recordLabel.loadPoints();
         super.resume();
     }
 

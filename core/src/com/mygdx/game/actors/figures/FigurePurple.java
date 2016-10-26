@@ -11,13 +11,11 @@ public class FigurePurple extends Figure {
 
     public FigurePurple(PlayScreen screen) {
         super(screen);
-        panel = new Panel(screen, Panel.Color.PURPLE, PADDING_Y, PADDING_Y);
+        panel = new Panel(screen, Panel.Color.PURPLE, BIG_PADDING, BIG_PADDING);
         panel.setActions(0, 0);
         addActor(panel);
 
-        width = Panel.LENGTH + 2 * PADDING_Y;
-        height = Panel.LENGTH + 2 * PADDING_Y;
-        setSize(width, height);
+        setSize(1, 1, BIG_PADDING, BIG_PADDING);
     }
 
 }

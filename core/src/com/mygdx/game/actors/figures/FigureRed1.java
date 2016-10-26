@@ -12,14 +12,12 @@ public class FigureRed1 extends Figure {
     public FigureRed1(PlayScreen screen) {
         super(screen);
         for (int i = 0; i < 5; ++i) {
-            panel = new Panel(screen, Panel.Color.RED, i * PANEL_SPACING, PADDING_Y);
+            panel = new Panel(screen, Panel.Color.RED, i * PANEL_WIDTH, BIG_PADDING);
             panel.setActions(0, i);
             addActor(panel);
         }
 
-        width = 5 * Panel.LENGTH + 4 * Figure.SPACING;
-        height = Panel.LENGTH + 2 * PADDING_Y;
-        setSize(width, height);
+        setSize(5, 1, NO_PADDING, BIG_PADDING);
     }
 
 }

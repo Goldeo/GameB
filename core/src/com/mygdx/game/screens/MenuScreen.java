@@ -9,7 +9,7 @@ public class MenuScreen extends GameScreen {
 
     private PlayButton playButton;
 
-    public MenuScreen(GameB game) {
+    public MenuScreen(final GameB game) {
         super(game);
     }
 

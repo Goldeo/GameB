@@ -12,8 +12,19 @@ public class Cell extends AbstractPanel {
 
     public static final float LENGTH = 38;
     private Field field;
-    private int row;
-    private int column;
+    private boolean isFull = false;
+
+    public Field getField() {
+        return field;
+    }
+
+    public boolean isFull() {
+        return isFull;
+    }
+
+    public void setFull(boolean full) {
+        isFull = full;
+    }
 
     public Actor getPanel() {
         if (getChildren().first() != null)
@@ -22,34 +33,10 @@ public class Cell extends AbstractPanel {
             return null;
     }
 
-    public int getColumn() {
-        return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public Field getField() {
-        return field;
-    }
-
     public Cell(Field field) {
         this.field = field;
         texture = GameB.atlas.findRegion("grayPanel");
         setSize(LENGTH, LENGTH);
-    }
-
-    public boolean isFull() {
-        return (getChildren().size > 0);
     }
 
     @Override

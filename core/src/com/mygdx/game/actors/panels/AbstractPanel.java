@@ -10,10 +10,28 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 
 public abstract class AbstractPanel extends Group {
 
-    protected TextureRegion texture;
-    protected Rectangle rectangleBounds = new Rectangle();
+    TextureRegion texture;
+    Rectangle rectangleBounds = new Rectangle();
+    int row;
+    int column;
 
-    public Rectangle getRectangleBounds() {
+    int getColumn() {
+        return column;
+    }
+
+    void setColumn(int column) {
+        this.column = column;
+    }
+
+    int getRow() {
+        return row;
+    }
+
+    void setRow(int row) {
+        this.row = row;
+    }
+
+    Rectangle getRectangleBounds() {
         return rectangleBounds;
     }
 

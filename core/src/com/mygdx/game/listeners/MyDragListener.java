@@ -1,13 +1,10 @@
 package com.mygdx.game.listeners;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.mygdx.game.actors.buttons.PauseButton;
-import com.mygdx.game.actors.buttons.PlayButton;
 import com.mygdx.game.actors.figures.Figure;
 import com.mygdx.game.actors.panels.Field;
-import com.mygdx.game.actors.panels.Panel;
 import com.mygdx.game.screens.PlayScreen;
 
 /**
@@ -46,6 +43,5 @@ public class MyDragListener extends DragListener {
         super.touchUp(event, x, y, pointer, button);
         figure.repositionPanels();
         figure.check();
-        field.check();
     }
 }
