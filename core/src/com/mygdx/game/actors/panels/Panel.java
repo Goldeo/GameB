@@ -1,6 +1,7 @@
 package com.mygdx.game.actors.panels;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
@@ -24,24 +25,6 @@ public class Panel extends AbstractPanel {
     private static final float DURATION = 0.1f;
     private static final float NO_DURATION = 0;
     private PlayScreen screen;
-
-    private MoveByAction moveByActionLength = new MoveByAction();
-    private MoveByAction moveByActionMediumLength = new MoveByAction();
-    private MoveToAction moveToActionBigLength = new MoveToAction();
-    private MoveByAction moveByActionDelete = new MoveByAction();
-
-    private SizeToAction sizeToActionLength = new SizeToAction();
-    private SizeToAction sizeToActionMediumLength = new SizeToAction();
-    private SizeToAction sizeToActionBigLength = new SizeToAction();
-    private SizeToAction sizeToActionDelete = new SizeToAction();
-
-    private RemoveActorAction removeActorAction = new RemoveActorAction();
-
-    private ParallelAction parallelActionLength = new ParallelAction(moveByActionLength, sizeToActionLength);
-    private ParallelAction parallelActionMediumLength = new ParallelAction(moveByActionMediumLength, sizeToActionMediumLength);
-    private ParallelAction parallelActionBigLength = new ParallelAction(moveToActionBigLength, sizeToActionBigLength);
-    private ParallelAction parallelActionDelete = new ParallelAction(moveByActionDelete, sizeToActionDelete);
-    private SequenceAction sequenceActionDelete = new SequenceAction(parallelActionDelete, removeActorAction);
 
     @Override
     public void setRectangleBounds() {
@@ -112,35 +95,16 @@ public class Panel extends AbstractPanel {
     public void setActions(int row, int column) {
         this.row = row;
         this.column = column;
-
-        moveByActionLength.setAmount(-this.column * MOVE_AMOUNT, -this.row * MOVE_AMOUNT);
-        moveByActionLength.setDuration(NO_DURATION);
-        sizeToActionLength.setSize(LENGTH, LENGTH);
-        sizeToActionLength.setDuration(NO_DURATION);
-
-        moveByActionMediumLength.setAmount(this.column * MOVE_AMOUNT, this.row * MOVE_AMOUNT);
-        moveByActionMediumLength.setDuration(NO_DURATION);
-        sizeToActionMediumLength.setSize(MEDIUM_LENGTH, MEDIUM_LENGTH);
-        sizeToActionMediumLength.setDuration(NO_DURATION);
-
-        moveToActionBigLength.setDuration(DURATION);
-        sizeToActionBigLength.setSize(BIG_LENGTH, BIG_LENGTH);
-        sizeToActionBigLength.setDuration(0);
-
-        moveByActionDelete.setAmount(BIG_LENGTH / 2, BIG_LENGTH / 2);
-        moveByActionDelete.setDuration(DURATION);
-        sizeToActionDelete.setSize(0, 0);
-        sizeToActionDelete.setDuration(DURATION);
     }
 
     public void incSize() {
-        parallelActionMediumLength.restart();
-        addAction(parallelActionMediumLength);
+        addAction(Actions.parallel(Actions.moveBy(column * MOVE_AMOUNT, row * MOVE_AMOUNT, NO_DURATION),
+                Actions.sizeTo(MEDIUM_LENGTH, MEDIUM_LENGTH, NO_DURATION)));
     }
 
     public void decSize() {
-        parallelActionLength.restart();
-        addAction(parallelActionLength);
+        addAction(Actions.parallel(Actions.moveBy(-column * MOVE_AMOUNT, -row * MOVE_AMOUNT, NO_DURATION),
+                Actions.sizeTo(LENGTH, LENGTH, NO_DURATION)));
     }
 
     public boolean isInsideCell(Cell cell) {
@@ -152,17 +116,14 @@ public class Panel extends AbstractPanel {
         cell.addActor(this);
         screen.getScoreLabel().addPoints(1);
 
-        moveToActionBigLength.setPosition(0, 0);
-        moveToActionBigLength.restart();
-        sizeToActionBigLength.restart();
-        addAction(parallelActionBigLength);
+        addAction(Actions.parallel(Actions.moveTo(0, 0, DURATION),
+                Actions.sizeTo(BIG_LENGTH, BIG_LENGTH, DURATION)));
     }
 
     public void clearCell() {
         screen.getScoreLabel().addPoints(1);
-        moveByActionDelete.restart();
-        sizeToActionDelete.restart();
-        addAction(sequenceActionDelete);
+        addAction(Actions.parallel(Actions.moveBy(BIG_LENGTH / 2, BIG_LENGTH / 2, DURATION),
+                Actions.sizeTo(0, 0, DURATION)));
     }
 
     @Override

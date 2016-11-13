@@ -6,6 +6,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.screens.MenuScreen;
+import com.mygdx.game.screens.PlayScreen;
 
 public class GameB extends Game {
 
@@ -16,8 +17,27 @@ public class GameB extends Game {
     public static Skin skin;
     public static State state;
 
+    private MenuScreen menuScreen;
+    private PlayScreen playScreen;
+
+    public enum Screen {
+        MENU_SCREEN,
+        PLAY_SCREEN
+    }
+
     public enum State {
         RUNNING, PAUSED
+    }
+
+    public void setScreen(Screen screen) {
+        switch (screen) {
+            case MENU_SCREEN:
+                setScreen(menuScreen);
+                break;
+            case PLAY_SCREEN:
+                setScreen(playScreen);
+                break;
+        }
     }
 
     public static void setGameState(State state) {
@@ -30,7 +50,11 @@ public class GameB extends Game {
         prefs = Gdx.app.getPreferences("Preferences");
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
         skin.addRegions(atlas);
-        setScreen(new MenuScreen(this));
+
+        menuScreen = new MenuScreen(this);
+        playScreen = new PlayScreen(this);
+
+        setScreen(Screen.MENU_SCREEN);
         setGameState(State.RUNNING);
     }
 

@@ -1,6 +1,5 @@
 package com.mygdx.game.actors.panels;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.mygdx.game.screens.PlayScreen;
 
@@ -40,10 +39,12 @@ public class Field extends Group {
     }
 
     public void check(ArrayList<Cell> cellsList) {
-        boolean b;
+        //boolean b;
         cells.checkLines(cellsList);
-        b = cells.isGameOver();
-        Gdx.app.log("b", "" + b);
+        if (cells.isGameOver())
+            screen.getScoreLabel().setToZero();
+        //b = cells.isGameOver();
+        //Gdx.app.log("b", "" + b);
     }
 
 }

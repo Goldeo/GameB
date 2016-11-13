@@ -4,7 +4,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.GameB;
-import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.PlayScreen;
 
 /**
@@ -12,9 +11,9 @@ import com.mygdx.game.screens.PlayScreen;
  */
 
 public class PauseButton extends Button {
-    private GameScreen screen;
+    private PlayScreen screen;
 
-    public PauseButton(final GameScreen screen) {
+    public PauseButton(final PlayScreen screen) {
         this.screen = screen;
         Button.ButtonStyle style = new Button.ButtonStyle();
         style.up = GameB.skin.getDrawable("pauseLight");
@@ -26,7 +25,7 @@ public class PauseButton extends Button {
         addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                screen.getGame().setScreen(new PlayScreen(screen.getGame()));
+                screen.showMenu();
             }
         });
     }

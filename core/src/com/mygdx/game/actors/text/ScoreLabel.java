@@ -16,6 +16,7 @@ public class ScoreLabel extends AbstractLabel {
 
     public void setToZero() {
         points = 0;
+        savePoints();
     }
 
     @Override

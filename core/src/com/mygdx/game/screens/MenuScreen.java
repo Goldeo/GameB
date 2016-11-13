@@ -16,13 +16,13 @@ public class MenuScreen extends GameScreen {
     @Override
     protected void initialization() {
         playButton = new PlayButton(this);
-        stage.addActor(playButton);
     }
 
     @Override
     protected void setSettings() {
         playButton.setPosition(GameB.WIDTH / 2 - playButton.getWidth() / 2,
                 GameB.HEIGHT / 2 - playButton.getHeight() / 2);
+        stage.addActor(playButton);
     }
 
     @Override
