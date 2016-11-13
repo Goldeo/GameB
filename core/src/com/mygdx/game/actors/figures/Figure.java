@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.mygdx.game.actors.panels.Cell;
 import com.mygdx.game.actors.panels.Field;
@@ -22,7 +23,7 @@ public abstract class Figure extends Group {
     protected Panel panel;
     int panelCountWidth;
     int panelsCountHeight;
-    boolean panelsArray[][];
+    private static final float DURATION = .2f;
     static final float NO_PADDING = 0;
     static final float LITTLE_PADDING = 15;
     static final float PADDING = 20;
@@ -34,7 +35,6 @@ public abstract class Figure extends Group {
     private PlayScreen screen;
     private Field field;
     private Vector2 standardPosition = new Vector2();
-    private MoveToAction moveToAction = new MoveToAction();
 
     public Figure(PlayScreen screen) {
         this.screen = screen;
@@ -104,15 +104,12 @@ public abstract class Figure extends Group {
     }
 
     public void goToStandardPosition() {
-        moveToAction.setPosition(standardPosition.x, standardPosition.y);
-        moveToAction.setDuration(0.2f);
 
         for (Actor panel: getChildren()) {
             ((Panel) panel).decSize();
         }
 
-        moveToAction.restart();
-        addAction(moveToAction);
+        addAction(Actions.moveTo(standardPosition.x, standardPosition.y, DURATION));
     }
 
     public void incSize() {
@@ -163,7 +160,6 @@ public abstract class Figure extends Group {
     protected void setSize(int panelsCountWidth, int panelsCountHeight, float paddingWidth, float paddingHeight) {
         this.panelCountWidth = panelsCountWidth;
         this.panelsCountHeight = panelsCountHeight;
-        panelsArray = new boolean[panelsCountWidth][panelsCountHeight];
 
         float w = panelsCountWidth * Panel.LENGTH + (panelsCountWidth - 1) * SPACING + 2 * paddingWidth;
         float h = panelsCountHeight * Panel.LENGTH + (panelsCountHeight - 1) * SPACING + 2 * paddingHeight;

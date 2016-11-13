@@ -10,10 +10,12 @@ import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.text.AbstractLabel;
 import com.mygdx.game.actors.text.RecordLabel;
 import com.mygdx.game.actors.text.ScoreLabel;
+import com.mygdx.game.screens.tables.PauseMenu;
 
 public class PlayScreen extends GameScreen {
 
     private Field field;
+    private PauseMenu pauseMenu;
     private PauseButton pauseButton;
     private FigureGroup figureGroup;
     private ScoreLabel scoreLabel;
@@ -31,7 +33,7 @@ public class PlayScreen extends GameScreen {
         return pauseButton;
     }
 
-    public AbstractLabel getScoreLabel() {
+    public ScoreLabel getScoreLabel() {
         return scoreLabel;
     }
 
@@ -44,9 +46,10 @@ public class PlayScreen extends GameScreen {
         pauseButton = new PauseButton(this);
         scoreLabel = new ScoreLabel("0", GameB.skin, "default-font", new Color(0, 1, 0, 1));
         recordLabel = new RecordLabel("0", GameB.skin, "default-font", new Color(0, 0, 1, 1));
-
         field = new Field(this, GameB.WIDTH / 2, GameB.HEIGHT / 2);
         figureGroup = new FigureGroup(this, 41, 0);
+
+        pauseMenu = new PauseMenu(this);
     }
 
     @Override
@@ -55,12 +58,22 @@ public class PlayScreen extends GameScreen {
         scoreLabel.setPosition(100, 620);
         recordLabel.setScoreLabel(scoreLabel);
         recordLabel.setPosition(300, 620);
+        pauseMenu.setPosition(GameB.WIDTH + 200 , GameB.HEIGHT / 2);
 
         stage.addActor(pauseButton);
         stage.addActor(scoreLabel);
         stage.addActor(recordLabel);
         stage.addActor(field);
         stage.addActor(figureGroup);
+        stage.addActor(pauseMenu);
+    }
+
+    public void showMenu() {
+        pauseMenu.show();
+    }
+
+    public void hideMenu() {
+        pauseMenu.hide();
     }
 
     @Override
