@@ -2,12 +2,6 @@ package com.mygdx.game.actors.panels;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RemoveActorAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.mygdx.game.GameB;
 import com.mygdx.game.screens.PlayScreen;
 
@@ -122,8 +116,8 @@ public class Panel extends AbstractPanel {
 
     public void clearCell() {
         screen.getScoreLabel().addPoints(1);
-        addAction(Actions.parallel(Actions.moveBy(BIG_LENGTH / 2, BIG_LENGTH / 2, DURATION),
-                Actions.sizeTo(0, 0, DURATION)));
+        addAction(Actions.sequence(Actions.parallel(Actions.moveBy(BIG_LENGTH / 2, BIG_LENGTH / 2, DURATION),
+                Actions.sizeTo(0, 0, DURATION)), Actions.removeActor()));
     }
 
     @Override

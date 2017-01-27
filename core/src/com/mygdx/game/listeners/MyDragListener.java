@@ -14,12 +14,10 @@ import com.mygdx.game.screens.PlayScreen;
 public class MyDragListener extends DragListener {
 
     private Figure figure;
-    private Field field;
     private PauseButton button;
 
     public MyDragListener(PlayScreen screen, Figure figure) {
         this.figure = figure;
-        this.field = screen.getField();
         this.button = screen.getPauseButton();
     }
 
