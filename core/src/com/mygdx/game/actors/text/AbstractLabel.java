@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.mygdx.game.managers.Assets;
+import com.mygdx.game.GameB;
 import com.mygdx.game.screens.GameScreen;
 
 /**
@@ -18,7 +18,7 @@ public abstract class AbstractLabel extends Label {
     protected long points;
 
     public AbstractLabel(CharSequence text, GameScreen screen, String fontName, Color color) {
-        super(text, screen.getGame().getAssets().getAssetManager().get(Assets.skinPath, Skin.class), fontName, color);
+        super(text, screen.getGame().getAssetManager().get(GameB.SKIN_PATH, Skin.class), fontName, color);
         prefs = screen.getGame().getPrefs();
         loadPoints();
     }

@@ -12,14 +12,15 @@ import java.util.ArrayList;
  */
 
 public class CellsArray {
-
     private GameScreen screen;
+    private Field field;
     private Cell cells[][] = new Cell[Field.CELL_COUNT][Field.CELL_COUNT];
-    private ArrayList<Integer> fullRows = new ArrayList<Integer>();
-    private ArrayList<Integer> fullColumns = new ArrayList<Integer>();
+    private ArrayList<Integer> fullRowsCount = new ArrayList<Integer>();
+    private ArrayList<Integer> fullColumnsCount = new ArrayList<Integer>();
 
-    public CellsArray(GameScreen screen) {
-        this.screen = screen;
+    public CellsArray(Field field) {
+        this.field = field;
+        screen = field.getScreen();
     }
 
     public void setCell(int i, int j, Cell cell) {
@@ -29,9 +30,8 @@ public class CellsArray {
     }
 
     public void checkLines(ArrayList<Cell> cellsList) {
-
-        fullRows.clear();
-        fullColumns.clear();
+        fullRowsCount.clear();
+        fullColumnsCount.clear();
 
         for (Cell cell: cellsList) {
             checkHorizontalLine(cell.getRow());
@@ -50,29 +50,30 @@ public class CellsArray {
 
             Figure figure = (Figure) actor;
 
-            for (int i = 0; i < Field.CELL_COUNT; ++i)
+            for (int i = 0; i < Field.CELL_COUNT; ++i) {
                 for (int j = 0; j < Field.CELL_COUNT; ++j) {
-
                     n = 0;
 
-                    for (Actor pan: figure.getChildren()) {
+                    for (Actor pan : figure.getChildren()) {
                         Panel panel = (Panel) pan;
 
                         column = panel.getColumn() + i;
                         row = panel.getRow() + j;
 
-                        if (column < Field.CELL_COUNT && row < Field.CELL_COUNT)
-                            if (cells[column][row].isFull())
+                        if (column < Field.CELL_COUNT && row < Field.CELL_COUNT) {
+                            if (cells[column][row].isFull()) {
                                 break;
-                            else
+                            } else {
                                 ++n;
+                            }
+                        }
                     }
 
-                    if (n == figure.getPanelsCount())
+                    if (n == figure.getPanelsCount()) {
                         return false;
-
+                    }
                 }
-
+            }
         }
 
         return true;
@@ -82,28 +83,32 @@ public class CellsArray {
         int n = 0;
 
         for (int i = 0; i < Field.CELL_COUNT; ++i) {
-            if (!cells[column][i].isFull())
+            if (!cells[column][i].isFull()) {
                 break;
-            else
+            } else {
                 ++n;
+            }
         }
 
-        if (!fullColumns.contains(column) && n == Field.CELL_COUNT)
-            fullColumns.add(column);
+        if (!fullColumnsCount.contains(column) && n == Field.CELL_COUNT) {
+            fullColumnsCount.add(column);
+        }
     }
 
     private void checkHorizontalLine(int row) {
         int n = 0;
 
         for (int i = 0; i < Field.CELL_COUNT; ++i) {
-            if (!cells[i][row].isFull())
+            if (!cells[i][row].isFull()) {
                 break;
-            else
+            } else {
                 ++n;
+            }
         }
 
-        if (!fullRows.contains(row) && n == Field.CELL_COUNT)
-            fullRows.add(row);
+        if (!fullRowsCount.contains(row) && n == Field.CELL_COUNT) {
+            fullRowsCount.add(row);
+        }
     }
 
     private void clearCells() {
@@ -116,7 +121,7 @@ public class CellsArray {
             }
         }
 
-        for (int column: fullColumns) {
+        for (int column: fullColumnsCount) {
             for (int i = 0; i < Field.CELL_COUNT; ++i) {
                 if (cells[column][i].isFull()) {
                     ((Panel) cells[column][i].getChildren().first()).clearCell();
@@ -129,29 +134,33 @@ public class CellsArray {
     }
 
     private void addBonusPoints() {
-        if (getFullLines() >= 5)
-            ((PlayScreen) screen).getScoreLabel().addPoints(100);
-        if (isEmptyField())
-            ((PlayScreen) screen).getScoreLabel().addPoints(100);
+        if (getFullLines() >= 5) {
+            field.addBonusPoints(Field.BONUS_POINTS_100);
+            field.playBonusSound();
+        }
+
+        if (isEmptyField()) {
+            field.addBonusPoints(Field.BONUS_POINTS_250);
+            field.playBonusSound();
+        }
     }
 
     private boolean isEmptyField() {
         int n = 0;
 
-        for (int i = 0; i < Field.CELL_COUNT; ++i)
+        for (int i = 0; i < Field.CELL_COUNT; ++i) {
             for (int j = 0; j < Field.CELL_COUNT; ++j) {
-                if (cells[i][j].isFull())
+                if (cells[i][j].isFull()) {
                     return false;
-                else
+                } else {
                     ++n;
+                }
             }
-
+        }
         return (n == 100);
     }
 
     private int getFullLines() {
-        return (fullRows.size() + fullColumns.size());
+        return (fullRowsCount.size() + fullColumnsCount.size());
     }
-
-
 }

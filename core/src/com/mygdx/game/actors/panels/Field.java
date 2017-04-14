@@ -11,6 +11,8 @@ import java.util.ArrayList;
  */
 
 public class Field extends Group {
+    public static final int BONUS_POINTS_100 = 100;
+    public static final int BONUS_POINTS_250 = 250;
 
     public static final int CELL_COUNT = 10;
     private static final int SPACING = 2;
@@ -19,7 +21,7 @@ public class Field extends Group {
 
     public Field(GameScreen screen, float x, float y) {
         this.screen = screen;
-        cells = new CellsArray(screen);
+        cells = new CellsArray(this);
 
         float width = CELL_COUNT * Cell.LENGTH + (CELL_COUNT - 1) * SPACING;
         float height = CELL_COUNT * Cell.LENGTH + (CELL_COUNT - 1) * SPACING;
@@ -42,13 +44,18 @@ public class Field extends Group {
     public void check(ArrayList<Cell> cellsList) {
         //boolean b;
         cells.checkLines(cellsList);
-        if (cells.isGameOver())
+        if (cells.isGameOver()) {
             ((PlayScreen) screen).getScoreLabel().setToZero();
+        }
         //b = cells.isGameOver();
         //Gdx.app.log("b", "" + b);
     }
 
     public GameScreen getScreen() {
         return screen;
+    }
+
+    public void addBonusPoints(int points) {
+        ((PlayScreen) screen).getScoreLabel().addPoints(points);
     }
 }

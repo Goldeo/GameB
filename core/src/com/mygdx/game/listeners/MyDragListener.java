@@ -12,19 +12,15 @@ import com.mygdx.game.screens.PlayScreen;
  */
 
 public class MyDragListener extends DragListener {
-
     private Figure figure;
-    private PauseButton button;
 
-    public MyDragListener(PlayScreen screen, Figure figure) {
+    public MyDragListener(Figure figure) {
         this.figure = figure;
-        this.button = screen.getPauseButton();
     }
 
     @Override
     public void drag(InputEvent event, float x, float y, int pointer) {
         super.drag(event, x, y, pointer);
-
         figure.setPosition(figure.getX() - figure.getWidth() / 2 + x, figure.getY() + y);
         figure.repositionPanels();
     }

@@ -3,17 +3,21 @@ package com.mygdx.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.mygdx.game.managers.Assets;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.screens.MenuScreen;
 import com.mygdx.game.screens.PlayScreen;
 
 public class GameB extends Game {
+    public static final String ATLAS_PATH = "atlases/atlas.pack";
+    public static final String SKIN_PATH = "skins/uiskin.json";
     public static final int WIDTH = 480;
     public static final int HEIGHT = 800;
     public State state;
 
     private Preferences prefs;
-    private Assets assets = new Assets();
+    private AssetManager assetManager;
     private MenuScreen menuScreen;
     private PlayScreen playScreen;
 
@@ -24,6 +28,13 @@ public class GameB extends Game {
 
     public enum State {
         RUNNING, PAUSED
+    }
+
+    private void loadAssets() {
+        assetManager = new AssetManager();
+        assetManager.load(ATLAS_PATH, TextureAtlas.class);
+        assetManager.load(SKIN_PATH, Skin.class);
+        assetManager.finishLoading();
     }
 
     public void setScreen(Screen screen) {
@@ -43,8 +54,8 @@ public class GameB extends Game {
 
     @Override
     public void create() {
+        loadAssets();
         prefs = Gdx.app.getPreferences("Preferences");
-        assets.load();
         menuScreen = new MenuScreen(this);
         playScreen = new PlayScreen(this);
 
@@ -64,11 +75,11 @@ public class GameB extends Game {
 
     @Override
     public void dispose() {
-        assets.dispose();
+        assetManager.dispose();
     }
 
-    public Assets getAssets() {
-        return assets;
+    public AssetManager getAssetManager() {
+        return assetManager;
     }
 
     public Preferences getPrefs() {

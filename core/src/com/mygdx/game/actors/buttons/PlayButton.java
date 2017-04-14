@@ -12,7 +12,7 @@ import com.mygdx.game.screens.GameScreen;
 public class PlayButton extends GameButton {
     public PlayButton(final GameScreen screen) {
         super(screen);
-        style.up = skin.getDrawable("playDark");
+        style.up = skin.getDrawable("playLight");
         style.down = skin.getDrawable("playDark");
 
         setSize(GameB.WIDTH / 5, GameB.WIDTH / 5);

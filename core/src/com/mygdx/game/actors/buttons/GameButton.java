@@ -1,10 +1,9 @@
 package com.mygdx.game.actors.buttons;
 
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.mygdx.game.managers.Assets;
+import com.mygdx.game.GameB;
 import com.mygdx.game.screens.GameScreen;
 
 /**
@@ -12,16 +11,16 @@ import com.mygdx.game.screens.GameScreen;
  */
 public abstract class GameButton extends Button {
     protected ButtonStyle style = new ButtonStyle();
-    protected Screen screen;
+    protected GameScreen screen;
     protected Skin skin;
 
     public GameButton(GameScreen screen) {
         this.screen = screen;
-        skin = new Skin(screen.getGame().getAssets().getAssetManager().get(Assets.atlasPath, TextureAtlas.class));
+        skin = new Skin(screen.getGame().getAssetManager().get(GameB.ATLAS_PATH, TextureAtlas.class));
         setStyle(style);
     }
 
-    public Screen getScreen() {
+    public GameScreen getScreen() {
         return screen;
     }
 }

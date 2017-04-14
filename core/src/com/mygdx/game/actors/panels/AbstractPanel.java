@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.mygdx.game.managers.Assets;
+import com.mygdx.game.GameB;
 import com.mygdx.game.screens.GameScreen;
 
 /**
@@ -21,7 +21,7 @@ public abstract class AbstractPanel extends Group {
 
     public AbstractPanel(GameScreen screen) {
         this.screen = screen;
-        atlas = screen.getGame().getAssets().getAssetManager().get(Assets.atlasPath, TextureAtlas.class);
+        atlas = screen.getGame().getAssetManager().get(GameB.ATLAS_PATH, TextureAtlas.class);
     }
 
     protected int getColumn() {
