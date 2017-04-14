@@ -2,7 +2,7 @@ package com.mygdx.game.actors.panels;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.mygdx.game.GameB;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.PlayScreen;
 
 /**
@@ -10,7 +10,6 @@ import com.mygdx.game.screens.PlayScreen;
  */
 
 public class Panel extends AbstractPanel {
-
     public static final float LENGTH = 20;
     public static final float MEDIUM_LENGTH = 34;
     public static final float BIG_LENGTH = 38;
@@ -18,7 +17,6 @@ public class Panel extends AbstractPanel {
     private static final float POINT_LENGTH = 2.0001f;
     private static final float DURATION = 0.1f;
     private static final float NO_DURATION = 0;
-    private PlayScreen screen;
 
     @Override
     public void setRectangleBounds() {
@@ -48,36 +46,36 @@ public class Panel extends AbstractPanel {
         AQUA, BLUE, GREEN, LIME, ORANGE, PINK, PURPLE, RED, YELLOW
     }
 
-    public Panel(PlayScreen screen, Color color, float x, float y) {
-        this.screen = screen;
+    public Panel(GameScreen screen, Color color, float x, float y) {
+        super(screen);
 
         switch (color) {
             case LIME:
-                texture = GameB.atlas.findRegion("limePanel");
+                texture = atlas.findRegion("limePanel");
                 break;
             case BLUE:
-                texture = GameB.atlas.findRegion("bluePanel");
+                texture = atlas.findRegion("bluePanel");
                 break;
             case RED:
-                texture = GameB.atlas.findRegion("redPanel");
+                texture = atlas.findRegion("redPanel");
                 break;
             case PURPLE:
-                texture = GameB.atlas.findRegion("purplePanel");
+                texture = atlas.findRegion("purplePanel");
                 break;
             case YELLOW:
-                texture = GameB.atlas.findRegion("yellowPanel");
+                texture = atlas.findRegion("yellowPanel");
                 break;
             case AQUA:
-                texture = GameB.atlas.findRegion("aquaPanel");
+                texture = atlas.findRegion("aquaPanel");
                 break;
             case ORANGE:
-                texture = GameB.atlas.findRegion("orangePanel");
+                texture = atlas.findRegion("orangePanel");
                 break;
             case GREEN:
-                texture = GameB.atlas.findRegion("greenPanel");
+                texture = atlas.findRegion("greenPanel");
                 break;
             case PINK:
-                texture = GameB.atlas.findRegion("pinkPanel");
+                texture = atlas.findRegion("pinkPanel");
                 break;
             default:
                 break;
@@ -108,14 +106,14 @@ public class Panel extends AbstractPanel {
     public void stickPanel(Cell cell) {
         setPosition(getAbsX() - cell.getAbsX(), getAbsY() - cell.getAbsY());
         cell.addActor(this);
-        screen.getScoreLabel().addPoints(1);
+        ((PlayScreen) screen).getScoreLabel().addPoints(1);
 
         addAction(Actions.parallel(Actions.moveTo(0, 0, DURATION),
                 Actions.sizeTo(BIG_LENGTH, BIG_LENGTH, DURATION)));
     }
 
     public void clearCell() {
-        screen.getScoreLabel().addPoints(1);
+        ((PlayScreen) screen).getScoreLabel().addPoints(1);
         addAction(Actions.sequence(Actions.parallel(Actions.moveBy(BIG_LENGTH / 2, BIG_LENGTH / 2, DURATION),
                 Actions.sizeTo(0, 0, DURATION)), Actions.removeActor()));
     }

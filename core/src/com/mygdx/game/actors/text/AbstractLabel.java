@@ -1,20 +1,25 @@
 package com.mygdx.game.actors.text;
 
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.mygdx.game.managers.Assets;
+import com.mygdx.game.screens.GameScreen;
 
 /**
  * Created by Sergey on 24.10.2016.
  */
 
 public abstract class AbstractLabel extends Label {
+    protected GameScreen screen;
+    protected Preferences prefs;
+    protected long points;
 
-    long points;
-
-    public AbstractLabel(CharSequence text, Skin skin, String fontName, Color color) {
-        super(text, skin, fontName, color);
+    public AbstractLabel(CharSequence text, GameScreen screen, String fontName, Color color) {
+        super(text, screen.getGame().getAssets().getAssetManager().get(Assets.skinPath, Skin.class), fontName, color);
+        prefs = screen.getGame().getPrefs();
         loadPoints();
     }
 

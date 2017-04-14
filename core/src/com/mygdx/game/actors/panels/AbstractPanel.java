@@ -1,37 +1,46 @@
 package com.mygdx.game.actors.panels;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.mygdx.game.managers.Assets;
+import com.mygdx.game.screens.GameScreen;
 
 /**
  * Created by Sergey on 05.10.2016.
  */
 
 public abstract class AbstractPanel extends Group {
+    protected GameScreen screen;
+    protected TextureAtlas atlas;
+    protected TextureRegion texture;
+    protected Rectangle rectangleBounds = new Rectangle();
+    protected int row;
+    protected int column;
 
-    TextureRegion texture;
-    Rectangle rectangleBounds = new Rectangle();
-    int row;
-    int column;
+    public AbstractPanel(GameScreen screen) {
+        this.screen = screen;
+        atlas = screen.getGame().getAssets().getAssetManager().get(Assets.atlasPath, TextureAtlas.class);
+    }
 
-    int getColumn() {
+    protected int getColumn() {
         return column;
     }
 
-    void setColumn(int column) {
+    protected void setColumn(int column) {
         this.column = column;
     }
 
-    int getRow() {
+    protected int getRow() {
         return row;
     }
 
-    void setRow(int row) {
+    protected  void setRow(int row) {
         this.row = row;
     }
 
-    Rectangle getRectangleBounds() {
+    protected Rectangle getRectangleBounds() {
         return rectangleBounds;
     }
 

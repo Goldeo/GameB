@@ -10,7 +10,6 @@ import com.mygdx.game.GameB;
  * Created by Sergey on 17.07.2016.
  */
 public abstract class GameScreen implements Screen {
-
     protected GameB game;
     protected Stage stage = new Stage(new StretchViewport(GameB.WIDTH, GameB.HEIGHT));
 
@@ -29,12 +28,12 @@ public abstract class GameScreen implements Screen {
 
     @Override
     public void pause() {
-        GameB.setGameState(GameB.State.PAUSED);
+        game.setGameState(GameB.State.PAUSED);
     }
 
     @Override
     public void resume() {
-        GameB.setGameState(GameB.State.RUNNING);
+        game.setGameState(GameB.State.RUNNING);
     }
 
     @Override
@@ -44,7 +43,7 @@ public abstract class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        switch(GameB.state) {
+        switch(game.state) {
             case RUNNING:
                 stage.act(delta);
                 break;

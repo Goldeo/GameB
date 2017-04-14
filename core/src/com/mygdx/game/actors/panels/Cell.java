@@ -1,6 +1,7 @@
 package com.mygdx.game.actors.panels;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.GameB;
 
@@ -9,7 +10,6 @@ import com.mygdx.game.GameB;
  */
 
 public class Cell extends AbstractPanel {
-
     public static final float LENGTH = 38;
     private Field field;
     private boolean isFull = false;
@@ -34,8 +34,9 @@ public class Cell extends AbstractPanel {
     }
 
     public Cell(Field field) {
+        super(field.getScreen());
         this.field = field;
-        texture = GameB.atlas.findRegion("grayPanel");
+        texture = atlas.findRegion("grayPanel");
         setSize(LENGTH, LENGTH);
     }
 

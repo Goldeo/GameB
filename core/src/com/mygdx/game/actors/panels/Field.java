@@ -1,6 +1,7 @@
 package com.mygdx.game.actors.panels;
 
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.PlayScreen;
 
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ public class Field extends Group {
 
     public static final int CELL_COUNT = 10;
     private static final int SPACING = 2;
-    private PlayScreen screen;
+    private GameScreen screen;
     private CellsArray cells;
 
-    public Field(PlayScreen screen, float x, float y) {
+    public Field(GameScreen screen, float x, float y) {
         this.screen = screen;
         cells = new CellsArray(screen);
 
@@ -42,9 +43,12 @@ public class Field extends Group {
         //boolean b;
         cells.checkLines(cellsList);
         if (cells.isGameOver())
-            screen.getScoreLabel().setToZero();
+            ((PlayScreen) screen).getScoreLabel().setToZero();
         //b = cells.isGameOver();
         //Gdx.app.log("b", "" + b);
     }
 
+    public GameScreen getScreen() {
+        return screen;
+    }
 }

@@ -6,7 +6,6 @@ import com.mygdx.game.GameB;
 import com.mygdx.game.actors.buttons.PlayButton;
 
 public class MenuScreen extends GameScreen {
-
     private PlayButton playButton;
 
     public MenuScreen(final GameB game) {

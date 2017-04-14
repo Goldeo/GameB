@@ -13,7 +13,6 @@ import com.mygdx.game.actors.text.ScoreLabel;
 import com.mygdx.game.screens.tables.PauseMenu;
 
 public class PlayScreen extends GameScreen {
-
     private Field field;
     private PauseMenu pauseMenu;
     private PauseButton pauseButton;
@@ -44,8 +43,8 @@ public class PlayScreen extends GameScreen {
     @Override
     protected void initialization() {
         pauseButton = new PauseButton(this);
-        scoreLabel = new ScoreLabel("0", GameB.skin, "default-font", new Color(0, 1, 0, 1));
-        recordLabel = new RecordLabel("0", GameB.skin, "default-font", new Color(0, 0, 1, 1));
+        scoreLabel = new ScoreLabel("0", this, "default-font", new Color(0, 1, 0, 1));
+        recordLabel = new RecordLabel("0", this, "default-font", new Color(0, 0, 1, 1));
         field = new Field(this, GameB.WIDTH / 2, GameB.HEIGHT / 2);
         figureGroup = new FigureGroup(this, 41, 0);
 

@@ -2,6 +2,7 @@ package com.mygdx.game.actors.panels;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.actors.figures.Figure;
+import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.PlayScreen;
 
 import java.util.ArrayList;
@@ -12,12 +13,12 @@ import java.util.ArrayList;
 
 public class CellsArray {
 
-    private PlayScreen screen;
+    private GameScreen screen;
     private Cell cells[][] = new Cell[Field.CELL_COUNT][Field.CELL_COUNT];
     private ArrayList<Integer> fullRows = new ArrayList<Integer>();
     private ArrayList<Integer> fullColumns = new ArrayList<Integer>();
 
-    public CellsArray(PlayScreen screen) {
+    public CellsArray(GameScreen screen) {
         this.screen = screen;
     }
 
@@ -45,7 +46,7 @@ public class CellsArray {
         int row;
         int n;
 
-        for (Actor actor: screen.getFigureGroup().getChildren()) {
+        for (Actor actor: ((PlayScreen) screen).getFigureGroup().getChildren()) {
 
             Figure figure = (Figure) actor;
 
@@ -129,9 +130,9 @@ public class CellsArray {
 
     private void addBonusPoints() {
         if (getFullLines() >= 5)
-            screen.getScoreLabel().addPoints(100);
+            ((PlayScreen) screen).getScoreLabel().addPoints(100);
         if (isEmptyField())
-            screen.getScoreLabel().addPoints(100);
+            ((PlayScreen) screen).getScoreLabel().addPoints(100);
     }
 
     private boolean isEmptyField() {
