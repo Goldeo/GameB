@@ -21,6 +21,7 @@ public class PlayButton extends GameButton {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 screen.getGame().setScreen(GameB.Screen.PLAY_SCREEN);
+                playButtonSound();
             }
         });
     }

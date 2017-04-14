@@ -112,11 +112,14 @@ public class CellsArray {
     }
 
     private void clearCells() {
-        for (int row: fullRows) {
+        boolean flag = false;
+
+        for (int row: fullRowsCount) {
             for (int i = 0; i < Field.CELL_COUNT; ++i) {
                 if (cells[i][row].isFull()) {
                     ((Panel) cells[i][row].getChildren().first()).clearCell();
                     cells[i][row].setFull(false);
+                    flag = true;
                 }
             }
         }
@@ -126,10 +129,14 @@ public class CellsArray {
                 if (cells[column][i].isFull()) {
                     ((Panel) cells[column][i].getChildren().first()).clearCell();
                     cells[column][i].setFull(false);
+                    flag = true;
                 }
             }
         }
 
+        if (flag) {
+            field.playClearSound();
+        }
         addBonusPoints();
     }
 

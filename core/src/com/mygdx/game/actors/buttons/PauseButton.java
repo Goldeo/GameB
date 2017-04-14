@@ -21,6 +21,7 @@ public class PauseButton extends GameButton {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ((PlayScreen) screen).showMenu();
+                playButtonSound();
             }
         });
     }

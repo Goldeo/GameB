@@ -1,10 +1,12 @@
 package com.mygdx.game.actors.figures;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.mygdx.game.GameB;
 import com.mygdx.game.actors.panels.Cell;
 import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
@@ -39,7 +41,7 @@ public abstract class Figure extends Group {
         this.screen = screen;
         this.field = screen.getField();
         toFront();
-        addListener(new MyDragListener(screen, this));
+        addListener(new MyDragListener(this));
     }
 
     public int getPanelsCount() {
@@ -137,9 +139,11 @@ public abstract class Figure extends Group {
 
         if (getPanelsCount() == n) {
             stickFigure(panels, cells);
-        }
-        else
+            playStickSound();
+        } else {
             goToStandardPosition();
+            playIncapacitySound();
+        }
     }
 
     private void stickFigure(ArrayList<Panel> panels, ArrayList<Cell> cells) {
@@ -153,6 +157,14 @@ public abstract class Figure extends Group {
         setTouchable(Touchable.disabled);
         screen.getFigureGroup().setFigures();
         field.check(cells);
+    }
+
+    private void playStickSound() {
+        screen.getGame().getAssetManager().get(GameB.PLASTIC_SOUND2_PATH, Sound.class).play(0.2f);
+    }
+
+    private void playIncapacitySound() {
+        screen.getGame().getAssetManager().get(GameB.SWAP_SOUND1_PATH, Sound.class).play();
     }
 
     protected void setSize(int panelsCountWidth, int panelsCountHeight, float paddingWidth, float paddingHeight) {
