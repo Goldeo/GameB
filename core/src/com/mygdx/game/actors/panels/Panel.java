@@ -14,7 +14,7 @@ public class Panel extends AbstractPanel {
     public static final float MEDIUM_LENGTH = 34;
     public static final float BIG_LENGTH = 38;
     private static final float MOVE_AMOUNT = BIG_LENGTH - LENGTH;
-    private static final float POINT_LENGTH = 2.0001f;
+    private static final float POINT_LENGTH = 2;
     private static final float DURATION = 0.1f;
     private static final float NO_DURATION = 0;
 
@@ -113,14 +113,17 @@ public class Panel extends AbstractPanel {
     }
 
     public void clearCell() {
-        ((PlayScreen) screen).getScoreLabel().addPoints(1);
+        addPoint();
         addAction(Actions.sequence(Actions.parallel(Actions.moveBy(BIG_LENGTH / 2, BIG_LENGTH / 2, DURATION),
                 Actions.sizeTo(0, 0, DURATION)), Actions.removeActor()));
+    }
+
+    private void addPoint() {
+        ((PlayScreen) screen).getScoreLabel().addPoints(1);
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         batch.draw(texture, getX(), getY(), getWidth(), getHeight());
     }
-
 }

@@ -22,6 +22,7 @@ public class ResumeButton extends GameButton {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 ((PlayScreen) screen).hideMenu();
+                screen.getGame().restartGame();
                 playButtonSound();
             }
         });

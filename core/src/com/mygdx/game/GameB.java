@@ -70,6 +70,10 @@ public class GameB extends Game {
         this.state = state;
     }
 
+    public void restartGame() {
+        setScreen(new PlayScreen(this));
+    }
+
     @Override
     public void create() {
         loadAssets();
