@@ -49,7 +49,7 @@ public class FigureGroup extends Group {
             figures[2].setPosition(getWidth() - 10 - figures[2].getWidth(), getHeight() - figures[2].getHeight() / 2);
 
             for (int i = 0; i < FUGIRES_COUNT; ++i) {
-                figures[i].setStandartPosition();
+                figures[i].setStandardPosition();
                 addActor(figures[i]);
             }
 

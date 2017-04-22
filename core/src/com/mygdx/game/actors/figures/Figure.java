@@ -22,8 +22,9 @@ import java.util.ArrayList;
 public abstract class Figure extends Group {
 
     protected Panel panel;
-    int panelCountWidth;
-    int panelsCountHeight;
+    private int panelCountWidth;
+    private int panelsCountHeight;
+    private static float LOW_VOLUME = 0.2f;
     private static final float DURATION = .2f;
     static final float NO_PADDING = 0;
     static final float LITTLE_PADDING = 15;
@@ -99,7 +100,7 @@ public abstract class Figure extends Group {
         }
     }
 
-    public void setStandartPosition() {
+    public void setStandardPosition() {
         standardPosition.set(getX(), getY());
     }
 
@@ -123,15 +124,12 @@ public abstract class Figure extends Group {
         ArrayList<Panel> panels = new ArrayList<Panel>();
         ArrayList<Cell> cells = new ArrayList<Cell>();
 
-        panels.clear();
-        cells.clear();
-
         for (Actor panel: getChildren()) {
-            for (Actor cell: field.getChildren()) {
-                if (((Panel) panel).isInsideCell(((Cell)cell))) {
+            for (Cell cell: field.getCellsArray()) {
+                if (((Panel) panel).isInsideCell((cell))) {
                     ++n;
                     panels.add((Panel) panel);
-                    cells.add((Cell) cell);
+                    cells.add(cell);
                     break;
                 }
             }
@@ -149,7 +147,6 @@ public abstract class Figure extends Group {
     private void stickFigure(ArrayList<Panel> panels, ArrayList<Cell> cells) {
         for (int i = 0; i < panels.size(); ++i) {
             panels.get(i).stickPanel(cells.get(i));
-            cells.get(i).setFull(true);
         }
 
         getParent().removeActor(this);
@@ -160,7 +157,7 @@ public abstract class Figure extends Group {
     }
 
     private void playStickSound() {
-        screen.getGame().getAssetManager().get(GameB.PLASTIC_SOUND2_PATH, Sound.class).play(0.2f);
+        screen.getGame().getAssetManager().get(GameB.PLASTIC_SOUND2_PATH, Sound.class).play(LOW_VOLUME);
     }
 
     private void playIncapacitySound() {

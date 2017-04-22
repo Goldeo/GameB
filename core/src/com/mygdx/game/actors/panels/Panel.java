@@ -84,7 +84,7 @@ public class Panel extends AbstractPanel {
         setBounds(x, y, LENGTH, LENGTH);
     }
 
-    public void setActions(int row, int column) {
+    public void setRowAndColumn(int row, int column) {
         this.row = row;
         this.column = column;
     }
@@ -105,14 +105,14 @@ public class Panel extends AbstractPanel {
 
     public void stickPanel(Cell cell) {
         setPosition(getAbsX() - cell.getAbsX(), getAbsY() - cell.getAbsY());
-        cell.addActor(this);
-        ((PlayScreen) screen).getScoreLabel().addPoints(1);
+        cell.setPanel(this);
+        addPoint();
 
-        addAction(Actions.parallel(Actions.moveTo(0, 0, DURATION),
+        addAction(Actions.parallel(Actions.moveTo(cell.getX(), cell.getY(), DURATION),
                 Actions.sizeTo(BIG_LENGTH, BIG_LENGTH, DURATION)));
     }
 
-    public void clearCell() {
+    public void delete() {
         addPoint();
         addAction(Actions.sequence(Actions.parallel(Actions.moveBy(BIG_LENGTH / 2, BIG_LENGTH / 2, DURATION),
                 Actions.sizeTo(0, 0, DURATION)), Actions.removeActor()));

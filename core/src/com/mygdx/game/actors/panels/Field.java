@@ -7,6 +7,7 @@ import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.PlayScreen;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sergey on 05.10.2016.
@@ -19,11 +20,11 @@ public class Field extends Group {
     public static final int CELL_COUNT = 10;
     private static final int SPACING = 2;
     private GameScreen screen;
-    private CellsArray cells;
+    private CellsArray cellsArray;
 
     public Field(GameScreen screen, float x, float y) {
         this.screen = screen;
-        cells = new CellsArray(this);
+        cellsArray = new CellsArray(this);
 
         float width = CELL_COUNT * Cell.LENGTH + (CELL_COUNT - 1) * SPACING;
         float height = CELL_COUNT * Cell.LENGTH + (CELL_COUNT - 1) * SPACING;
@@ -38,20 +39,31 @@ public class Field extends Group {
                 cell.setPosition(i * (Cell.LENGTH + SPACING), j * (Cell.LENGTH + SPACING));
                 cell.setRectangleBounds();
                 addActor(cell);
-                cells.setCell(i, j, cell);
+                cellsArray.setCell(i, j, cell);
             }
-        }
-    }
-
-    public void check(ArrayList<Cell> cellsList) {
-        cells.checkLines(cellsList);
-        if (cells.isGameOver()) {
-            playGameOverSound();
         }
     }
 
     public GameScreen getScreen() {
         return screen;
+    }
+
+    public List<Cell> getCellsArray() {
+        List<Cell> c = new ArrayList<Cell>();
+
+        for (int i = 0; i < Field.CELL_COUNT; ++i) {
+            for (int j = 0; j < Field.CELL_COUNT; ++j) {
+                c.add(cellsArray.getCells()[i][j]);
+            }
+        }
+        return c;
+    }
+
+    public void check(ArrayList<Cell> cellsList) {
+        cellsArray.checkLines(cellsList);
+        if (cellsArray.isGameOver()) {
+            playGameOverSound();
+        }
     }
 
     public void addBonusPoints(int points) {

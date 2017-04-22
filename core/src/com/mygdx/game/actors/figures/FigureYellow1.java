@@ -13,7 +13,7 @@ public class FigureYellow1 extends Figure {
         super(screen);
         for (int i = 0; i < 2; ++i) {
             panel = new Panel(screen, Panel.Color.YELLOW, i * PANEL_WIDTH + MEDIUM_PADDING, BIG_PADDING);
-            panel.setActions(0, i);
+            panel.setRowAndColumn(0, i);
             addActor(panel);
         }
 

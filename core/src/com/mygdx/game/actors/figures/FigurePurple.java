@@ -12,7 +12,7 @@ public class FigurePurple extends Figure {
     public FigurePurple(PlayScreen screen) {
         super(screen);
         panel = new Panel(screen, Panel.Color.PURPLE, BIG_PADDING, BIG_PADDING);
-        panel.setActions(0, 0);
+        panel.setRowAndColumn(0, 0);
         addActor(panel);
 
         setSize(1, 1, BIG_PADDING, BIG_PADDING);

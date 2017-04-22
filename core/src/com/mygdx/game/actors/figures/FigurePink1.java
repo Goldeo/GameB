@@ -13,7 +13,7 @@ public class FigurePink1 extends Figure {
         super(screen);
         for (int i = 0; i < 4; ++i) {
             panel = new Panel(screen, Panel.Color.PINK, i * PANEL_WIDTH + LITTLE_PADDING, BIG_PADDING);
-            panel.setActions(0, i);
+            panel.setRowAndColumn(0, i);
             addActor(panel);
         }
 

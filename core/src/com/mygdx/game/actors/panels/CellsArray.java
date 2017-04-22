@@ -14,13 +14,17 @@ import java.util.ArrayList;
 public class CellsArray {
     private GameScreen screen;
     private Field field;
-    private Cell cells[][] = new Cell[Field.CELL_COUNT][Field.CELL_COUNT];
+    private Cell[][] cells = new Cell[Field.CELL_COUNT][Field.CELL_COUNT];
     private ArrayList<Integer> fullRowsCount = new ArrayList<Integer>();
     private ArrayList<Integer> fullColumnsCount = new ArrayList<Integer>();
 
     public CellsArray(Field field) {
         this.field = field;
         screen = field.getScreen();
+    }
+
+    public Cell[][] getCells() {
+        return cells;
     }
 
     public void setCell(int i, int j, Cell cell) {
@@ -117,8 +121,7 @@ public class CellsArray {
         for (int row: fullRowsCount) {
             for (int i = 0; i < Field.CELL_COUNT; ++i) {
                 if (cells[i][row].isFull()) {
-                    ((Panel) cells[i][row].getChildren().first()).clearCell();
-                    cells[i][row].setFull(false);
+                    cells[i][row].clearCell();
                     flag = true;
                 }
             }
@@ -127,8 +130,7 @@ public class CellsArray {
         for (int column: fullColumnsCount) {
             for (int i = 0; i < Field.CELL_COUNT; ++i) {
                 if (cells[column][i].isFull()) {
-                    ((Panel) cells[column][i].getChildren().first()).clearCell();
-                    cells[column][i].setFull(false);
+                    cells[column][i].clearCell();
                     flag = true;
                 }
             }

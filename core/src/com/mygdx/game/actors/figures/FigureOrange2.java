@@ -13,7 +13,7 @@ public class FigureOrange2 extends Figure {
         super(screen);
         for (int i = 0; i < 3; ++i) {
             panel = new Panel(screen, Panel.Color.ORANGE, BIG_PADDING, i * PANEL_WIDTH + BIG_PADDING);
-            panel.setActions(i, 0);
+            panel.setRowAndColumn(i, 0);
             addActor(panel);
         }
 

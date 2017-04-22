@@ -1,9 +1,6 @@
 package com.mygdx.game.actors.panels;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.mygdx.game.GameB;
 
 /**
  * Created by Sergey on 05.10.2016.
@@ -12,6 +9,7 @@ import com.mygdx.game.GameB;
 public class Cell extends AbstractPanel {
     public static final float LENGTH = 38;
     private Field field;
+    private Panel panel;
     private boolean isFull = false;
 
     public Field getField() {
@@ -22,15 +20,21 @@ public class Cell extends AbstractPanel {
         return isFull;
     }
 
-    public void setFull(boolean full) {
-        isFull = full;
+    public void setPanel(Panel panel) {
+        this.panel = panel;
+        if (panel != null) isFull = true;
+            else isFull = false;
+        field.addActor(panel);
+        panel.setPosition(getX(), getY());
     }
 
-    public Actor getPanel() {
-        if (getChildren().first() != null)
-            return getChildren().first();
-        else
-            return null;
+    public Panel getPanel() {
+        return panel;
+    }
+
+    public void clearCell() {
+        panel.delete();
+        isFull = false;
     }
 
     public Cell(Field field) {

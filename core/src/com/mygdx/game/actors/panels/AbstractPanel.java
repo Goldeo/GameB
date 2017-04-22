@@ -3,7 +3,7 @@ package com.mygdx.game.actors.panels;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.mygdx.game.GameB;
 import com.mygdx.game.screens.GameScreen;
 
@@ -11,7 +11,7 @@ import com.mygdx.game.screens.GameScreen;
  * Created by Sergey on 05.10.2016.
  */
 
-public abstract class AbstractPanel extends Group {
+public abstract class AbstractPanel extends Actor {
     protected GameScreen screen;
     protected TextureAtlas atlas;
     protected TextureRegion texture;

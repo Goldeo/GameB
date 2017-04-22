@@ -12,15 +12,15 @@ public class FigureGreen1 extends Figure {
     public FigureGreen1(PlayScreen screen) {
         super(screen);
         panel = new Panel(screen, Panel.Color.GREEN, MEDIUM_PADDING, BIG_PADDING);
-        panel.setActions(0, 0);
+        panel.setRowAndColumn(0, 0);
         addActor(panel);
 
         panel = new Panel(screen, Panel.Color.GREEN, PANEL_WIDTH + MEDIUM_PADDING, BIG_PADDING);
-        panel.setActions(0, 1);
+        panel.setRowAndColumn(0, 1);
         addActor(panel);
 
         panel = new Panel(screen, Panel.Color.GREEN, MEDIUM_PADDING, PANEL_WIDTH + BIG_PADDING);
-        panel.setActions(1, 0);
+        panel.setRowAndColumn(1, 0);
         addActor(panel);
 
         setSize(2, 2, MEDIUM_PADDING, BIG_PADDING);
