@@ -7,10 +7,9 @@ import com.mygdx.game.GameB;
 import com.mygdx.game.actors.buttons.PauseButton;
 import com.mygdx.game.actors.figures.FigureGroup;
 import com.mygdx.game.actors.panels.Field;
-import com.mygdx.game.actors.text.AbstractLabel;
 import com.mygdx.game.actors.text.RecordLabel;
 import com.mygdx.game.actors.text.ScoreLabel;
-import com.mygdx.game.screens.tables.PauseMenu;
+import com.mygdx.game.actors.tables.PauseMenu;
 
 public class PlayScreen extends GameScreen {
     private Field field;

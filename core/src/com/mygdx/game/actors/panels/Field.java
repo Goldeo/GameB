@@ -1,10 +1,9 @@
 package com.mygdx.game.actors.panels;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Group;
-import com.mygdx.game.GameB;
 import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.PlayScreen;
+import com.mygdx.game.progress.sounds.SoundsManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,14 +70,14 @@ public class Field extends Group {
     }
 
     public void playBonusSound() {
-        screen.getGame().getAssetManager().get(GameB.PLASTIC_SOUND1_PATH, Sound.class).play();
+        screen.getGame().getSoundsManager().playSound(SoundsManager.PLASTIC_SOUND1_PATH);
     }
 
     public void playClearSound() {
-        screen.getGame().getAssetManager().get(GameB.SWISH_SOUND1_PATH, Sound.class).play();
+        screen.getGame().getSoundsManager().playSound(SoundsManager.SWISH_SOUND1_PATH);
     }
 
     public void playGameOverSound() {
-        screen.getGame().getAssetManager().get(GameB.NEGATIVE_SOUND1_PATH, Sound.class).play();
+        screen.getGame().getSoundsManager().playSound(SoundsManager.NEGATIVE_SOUND1_PATH);
     }
 }

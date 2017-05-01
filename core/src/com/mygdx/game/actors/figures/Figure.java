@@ -1,17 +1,16 @@
 package com.mygdx.game.actors.figures;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.mygdx.game.GameB;
 import com.mygdx.game.actors.panels.Cell;
 import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.panels.Panel;
 import com.mygdx.game.listeners.MyDragListener;
 import com.mygdx.game.screens.PlayScreen;
+import com.mygdx.game.progress.sounds.SoundsManager;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,6 @@ public abstract class Figure extends Group {
     protected Panel panel;
     private int panelCountWidth;
     private int panelsCountHeight;
-    private static float LOW_VOLUME = 0.2f;
     private static final float DURATION = .2f;
     static final float NO_PADDING = 0;
     static final float LITTLE_PADDING = 15;
@@ -157,11 +155,11 @@ public abstract class Figure extends Group {
     }
 
     private void playStickSound() {
-        screen.getGame().getAssetManager().get(GameB.PLASTIC_SOUND2_PATH, Sound.class).play(LOW_VOLUME);
+        screen.getGame().getSoundsManager().playSound(SoundsManager.PLASTIC_SOUND2_PATH);
     }
 
     private void playIncapacitySound() {
-        screen.getGame().getAssetManager().get(GameB.SWAP_SOUND1_PATH, Sound.class).play();
+        screen.getGame().getSoundsManager().playSound(SoundsManager.SWAP_SOUND1_PATH);
     }
 
     protected void setSize(int panelsCountWidth, int panelsCountHeight, float paddingWidth, float paddingHeight) {

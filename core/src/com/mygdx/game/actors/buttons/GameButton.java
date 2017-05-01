@@ -1,11 +1,11 @@
 package com.mygdx.game.actors.buttons;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.GameB;
 import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.progress.sounds.SoundsManager;
 
 /**
  * Created by Sergey on 13.04.2017.
@@ -22,7 +22,7 @@ public abstract class GameButton extends Button {
     }
 
     protected void playButtonSound() {
-        screen.getGame().getAssetManager().get(GameB.PLASTIC_SOUND3_PATH, Sound.class).play();
+        screen.getGame().getSoundsManager().playSound(SoundsManager.PLASTIC_SOUND3_PATH);
     }
 
     public GameScreen getScreen() {
