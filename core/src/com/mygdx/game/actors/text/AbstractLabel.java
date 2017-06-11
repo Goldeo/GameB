@@ -15,34 +15,15 @@ import com.mygdx.game.screens.GameScreen;
 public abstract class AbstractLabel extends Label {
     protected GameScreen screen;
     protected Preferences prefs;
-    protected long points;
 
     public AbstractLabel(CharSequence text, GameScreen screen, String fontName, Color color) {
         super(text, screen.getGame().getAssetManager().get(GameB.SKIN_PATH, Skin.class), fontName, color);
+        this.screen = screen;
         prefs = screen.getGame().getPrefs();
-        loadPoints();
     }
-
-    public long getPoints() {
-        return points;
-    }
-
-    public void setPoints(long points) {
-        this.points = points;
-        setText(String.valueOf(points));
-    }
-
-    public void addPoints(long addingPoints) {
-        points += addingPoints;
-        setText(String.valueOf(points));
-    }
-
-    public abstract void savePoints();
-    public abstract void loadPoints();
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
     }
-
 }

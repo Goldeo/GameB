@@ -66,7 +66,7 @@ public class Field extends Group {
     }
 
     public void addBonusPoints(int points) {
-        ((PlayScreen) screen).getScoreLabel().addPoints(points);
+        screen.getGame().getPointsManager().addScorePoints(points);
     }
 
     public void playBonusSound() {

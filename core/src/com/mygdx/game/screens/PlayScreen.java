@@ -54,7 +54,6 @@ public class PlayScreen extends GameScreen {
     protected void setSettings() {
         pauseButton.setPosition(GameB.WIDTH - pauseButton.getWidth() - 15, GameB.HEIGHT - pauseButton.getHeight() - 10);
         scoreLabel.setPosition(100, 620);
-        recordLabel.setScoreLabel(scoreLabel);
         recordLabel.setPosition(300, 620);
         pauseMenu.setPosition(GameB.WIDTH + 200 , GameB.HEIGHT / 2);
 
@@ -83,15 +82,11 @@ public class PlayScreen extends GameScreen {
 
     @Override
     public void pause() {
-        scoreLabel.savePoints();
-        recordLabel.savePoints();
         super.pause();
     }
 
     @Override
     public void resume() {
-        scoreLabel.savePoints();
-        recordLabel.loadPoints();
         super.resume();
     }
 

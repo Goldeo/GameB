@@ -119,7 +119,7 @@ public class Panel extends AbstractPanel {
     }
 
     private void addPoint() {
-        ((PlayScreen) screen).getScoreLabel().addPoints(1);
+        screen.getGame().getPointsManager().addScorePoints(1);
     }
 
     @Override

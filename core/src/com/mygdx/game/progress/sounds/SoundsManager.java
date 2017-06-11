@@ -4,12 +4,13 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.mygdx.game.GameB;
+import com.mygdx.game.progress.IProgress;
 
 /**
  * Created by Sergey on 30.04.2017.
  */
 
-public class SoundsManager {
+public class SoundsManager implements IProgress {
     public static final String SWAP_SOUND1_PATH = "sounds/swap_sound1.wav";
     public static final String SWAP_SOUND2_PATH = "sounds/swap_sound2.wav";
     public static final String PLASTIC_SOUND1_PATH = "sounds/plastic_sound1.wav";
@@ -30,7 +31,7 @@ public class SoundsManager {
 
     public SoundsManager(GameB game) {
         prefs = game.getPrefs();
-        loadSoundState();
+        load();
 
         assetManager = game.getAssetManager();
         assetManager.load(SWAP_SOUND1_PATH, Sound.class);
@@ -59,16 +60,6 @@ public class SoundsManager {
         this.volume = volume;
     }
 
-    private void loadSoundState() {
-        if (prefs.getBoolean(SOUND_PREFS_NAME)) {
-            setSoundState(new SoundOnState());
-            volume = SOUND_ON_VOLUME;
-        } else {
-            setSoundState(new SoundOffState());
-            volume = SOUND_OFF_VOLUME;
-        }
-    }
-
     public void saveSoundState() {
         if (isOn()) {
             prefs.putBoolean(SOUND_PREFS_NAME, true);
@@ -91,5 +82,25 @@ public class SoundsManager {
 
     public boolean isOn() {
         return soundState instanceof SoundOnState;
+    }
+
+    @Override
+    public void save() {
+        if (isOn()) {
+            prefs.putBoolean(SOUND_PREFS_NAME, true);
+        } else {
+            prefs.putBoolean(SOUND_PREFS_NAME, false);
+        }
+    }
+
+    @Override
+    public void load() {
+        if (prefs.getBoolean(SOUND_PREFS_NAME)) {
+            setSoundState(new SoundOnState());
+            volume = SOUND_ON_VOLUME;
+        } else {
+            setSoundState(new SoundOffState());
+            volume = SOUND_OFF_VOLUME;
+        }
     }
 }

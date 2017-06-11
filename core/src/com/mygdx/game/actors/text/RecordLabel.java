@@ -10,28 +10,7 @@ import com.mygdx.game.screens.GameScreen;
  */
 
 public class RecordLabel extends AbstractLabel {
-
-    private ScoreLabel scoreLabel;
-
     public RecordLabel(CharSequence text, GameScreen screen, String fontName, Color color) {
         super(text, screen, fontName, color);
     }
-
-    public void setScoreLabel(ScoreLabel scoreLabel) {
-        this.scoreLabel = scoreLabel;
-    }
-
-    @Override
-    public void savePoints() {
-        if (scoreLabel.getPoints() > points) {
-            prefs.putLong("Record", scoreLabel.getPoints());
-            prefs.flush();
-        }
-    }
-
-    @Override
-    public void loadPoints() {
-        setPoints(prefs.getLong("Record"));
-    }
-
 }

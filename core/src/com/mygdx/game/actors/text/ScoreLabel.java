@@ -11,20 +11,4 @@ public class ScoreLabel extends AbstractLabel {
     public ScoreLabel(CharSequence text, GameScreen screen, String fontName, Color color) {
         super(text, screen, fontName, color);
     }
-
-    public void setToZero() {
-        points = 0;
-        savePoints();
-    }
-
-    @Override
-    public void savePoints() {
-        prefs.putLong("Score", points);
-        prefs.flush();
-    }
-
-    @Override
-    public void loadPoints() {
-        setPoints(prefs.getLong("Score"));
-    }
 }

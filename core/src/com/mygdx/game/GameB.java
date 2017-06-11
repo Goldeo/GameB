@@ -6,6 +6,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.mygdx.game.progress.points.PointsManager;
 import com.mygdx.game.screens.MenuScreen;
 import com.mygdx.game.screens.PlayScreen;
 import com.mygdx.game.progress.sounds.SoundsManager;
@@ -20,6 +21,7 @@ public class GameB extends Game {
 
     private Preferences prefs;
     private SoundsManager soundsManager;
+    private PointsManager pointsManager;
     private AssetManager assetManager;
     private MenuScreen menuScreen;
     private PlayScreen playScreen;
@@ -39,6 +41,7 @@ public class GameB extends Game {
         assetManager.load(ATLAS_PATH, TextureAtlas.class);
         assetManager.load(SKIN_PATH, Skin.class);
         soundsManager = new SoundsManager(this);
+        pointsManager = new PointsManager(this);
         assetManager.finishLoading();
     }
 
@@ -91,6 +94,10 @@ public class GameB extends Game {
 
     public SoundsManager getSoundsManager() {
         return soundsManager;
+    }
+
+    public PointsManager getPointsManager() {
+        return pointsManager;
     }
 
     public AssetManager getAssetManager() {
