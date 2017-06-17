@@ -9,7 +9,7 @@ import com.mygdx.game.actors.figures.FigureGroup;
 import com.mygdx.game.actors.panels.Field;
 import com.mygdx.game.actors.text.RecordLabel;
 import com.mygdx.game.actors.text.ScoreLabel;
-import com.mygdx.game.actors.tables.PauseMenu;
+import com.mygdx.game.actors.menus.PauseMenu;
 
 public class PlayScreen extends GameScreen {
     private Field field;
@@ -55,7 +55,6 @@ public class PlayScreen extends GameScreen {
         pauseButton.setPosition(GameB.WIDTH - pauseButton.getWidth() - 15, GameB.HEIGHT - pauseButton.getHeight() - 10);
         scoreLabel.setPosition(100, 620);
         recordLabel.setPosition(300, 620);
-        pauseMenu.setPosition(GameB.WIDTH + 200 , GameB.HEIGHT / 2);
 
         stage.addActor(pauseButton);
         stage.addActor(scoreLabel);

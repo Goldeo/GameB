@@ -136,10 +136,24 @@ redPanel
   orig: 40, 40
   offset: 0, 0
   index: -1
-yellowPanel
+transparentPanel
   rotate: false
   xy: 879, 9
   size: 40, 40
   orig: 40, 40
+  offset: 0, 0
+  index: -1
+yellowPanel
+  rotate: false
+  xy: 921, 9
+  size: 40, 40
+  orig: 40, 40
+  offset: 0, 0
+  index: -1
+bg_menu
+  rotate: false
+  xy: 963, 33
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
