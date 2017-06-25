@@ -7,8 +7,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.progress.points.PointsManager;
-import com.mygdx.game.screens.MenuScreen;
-import com.mygdx.game.screens.PlayScreen;
+import com.mygdx.game.view.screens.MenuScreen;
+import com.mygdx.game.view.screens.PlayScreen;
 import com.mygdx.game.progress.sounds.SoundsManager;
 
 public class GameB extends Game {
