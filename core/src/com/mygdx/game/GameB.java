@@ -24,6 +24,11 @@ public class GameB extends Game {
     private PointsManager pointsManager;
     private AssetManager assetManager;
     private MenuScreen menuScreen;
+
+    public PlayScreen getPlayScreen() {
+        return playScreen;
+    }
+
     private PlayScreen playScreen;
 
     public enum Screen {
@@ -67,9 +72,11 @@ public class GameB extends Game {
     @Override
     public void create() {
         loadAssets();
-
         menuScreen = new MenuScreen(this);
         playScreen = new PlayScreen(this);
+
+        pointsManager.addObserver(playScreen.getScoreLabel());
+        pointsManager.addObserver(playScreen.getRecordLabel());
 
         setScreen(Screen.MENU_SCREEN);
         setGameState(State.RUNNING);

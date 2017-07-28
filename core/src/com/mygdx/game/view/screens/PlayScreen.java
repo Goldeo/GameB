@@ -35,6 +35,10 @@ public class PlayScreen extends GameScreen {
         return scoreLabel;
     }
 
+    public RecordLabel getRecordLabel() {
+        return recordLabel;
+    }
+
     public PlayScreen() {
         super();
     }
